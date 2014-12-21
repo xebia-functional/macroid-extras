@@ -1,10 +1,11 @@
-package com.fortysevendeg.scala.android.macroid
+package com.fortysevendeg.macroid.extras
 
 import android.view.View
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import macroid.FullDsl._
 import macroid.Ui
+import scala.language.implicitConversions
 
 object ExtraSeekBarEvents {
 

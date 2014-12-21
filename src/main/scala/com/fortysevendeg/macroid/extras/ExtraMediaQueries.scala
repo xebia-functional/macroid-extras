@@ -1,7 +1,8 @@
-package com.fortysevendeg.scala.android.macroid
+package com.fortysevendeg.macroid.extras
 
 import macroid.AppContext
 import macroid.FullDsl._
+import scala.language.postfixOps
 
 trait DevicesQueries {
   def tablet(implicit ctx: AppContext) = widerThan(720 dp)

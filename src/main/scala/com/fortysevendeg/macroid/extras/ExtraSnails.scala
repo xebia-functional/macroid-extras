@@ -1,4 +1,4 @@
-package com.fortysevendeg.scala.android.macroid
+package com.fortysevendeg.macroid.extras
 
 import android.animation.{Animator, AnimatorListenerAdapter}
 import android.view.View._

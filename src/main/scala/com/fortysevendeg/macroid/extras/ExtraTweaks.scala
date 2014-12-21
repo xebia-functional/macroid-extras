@@ -1,4 +1,4 @@
-package com.fortysevendeg.scala.android.macroid
+package com.fortysevendeg.macroid.extras
 
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
