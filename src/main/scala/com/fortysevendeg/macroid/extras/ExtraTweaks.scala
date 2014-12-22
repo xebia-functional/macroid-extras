@@ -15,31 +15,21 @@ import macroid.{AppContext, Tweak}
 object ViewTweaks {
   type W = View
 
-  //  private def lp(w: Int, h: Int) = Tweak[W](_.setLayoutParams(new ViewGroup.LayoutParams(w, h)))
-
   val vMatchParent = lp[ViewGroup](MATCH_PARENT, MATCH_PARENT)
   val vWrapContent = lp[ViewGroup](WRAP_CONTENT, WRAP_CONTENT)
   val vMatchWidth = lp[ViewGroup](MATCH_PARENT, WRAP_CONTENT)
   val vMatchHeight = lp[ViewGroup](WRAP_CONTENT, MATCH_PARENT)
 
-  //  def vContentSizeMacroid[V <: ViewGroup](w: Int, h: Int) = macroid.FullDsl.lp[V](w, h)
-  //
-  //  def vContentSize(w: Int, h: Int) = lp(w, h)
-
   def vContentSizeMatchWidth(h: Int) = lp[ViewGroup](MATCH_PARENT, h)
 
   def vContentSizeMatchHeight(w: Int) = lp[ViewGroup](w, MATCH_PARENT)
 
-  def vMargins(
-      margin: Int) = Tweak[W] {
-    view =>
-      //      view.getLayoutParams.asInstanceOf[ViewGroup.MarginLayoutParams].setMargins(margin, margin, margin, margin)
-      //      view.requestLayout
-      view.getLayoutParams match {
-        case lp: MarginLayoutParams =>
-          lp.setMargins(margin, margin, margin, margin)
-        case _ =>
-      }
+  def vMargins(margin: Int) = Tweak[W] {
+    _.getLayoutParams match {
+      case lp: MarginLayoutParams =>
+        lp.setMargins(margin, margin, margin, margin)
+      case _ =>
+    }
   }
 
   def vMargin(
@@ -49,7 +39,7 @@ object ViewTweaks {
       marginBottom: Int = 0) = Tweak[W] {
     view =>
       view.getLayoutParams.asInstanceOf[ViewGroup.MarginLayoutParams].setMargins(marginLeft, marginTop, marginRight, marginBottom)
-      view.requestLayout
+      view.requestLayout()
   }
 
   def vPaddings(padding: Int) = Tweak[W](_.setPadding(padding, padding, padding, padding))
@@ -83,6 +73,7 @@ object ImageViewTweaks {
   type W = ImageView
 
   def ivSrc(drawable: Drawable) = Tweak[W](_.setImageDrawable(drawable))
+  def ivSrc(res: Int) = Tweak[W](_.setImageResource(res))
 }
 
 object LinearLayoutTweaks {
@@ -120,11 +111,10 @@ object FrameLayoutTweaks {
   val flMatchWeightVertical = lp[W](MATCH_PARENT, 0, 1)
   val flMatchWeightHorizontal = lp[W](0, MATCH_PARENT, 1)
 
-  def flLayoutGravity(gravity: Int) = Tweak[View] {
-    view =>
-      val param = new FrameLayout.LayoutParams(view.getLayoutParams.width, view.getLayoutParams.height)
-      param.gravity = gravity
-      view.setLayoutParams(param)
+  def flLayoutGravity(gravity: Int) = Tweak[View] { view =>
+    val param = new FrameLayout.LayoutParams(view.getLayoutParams.width, view.getLayoutParams.height)
+    param.gravity = gravity
+    view.setLayoutParams(param)
   }
 
 }

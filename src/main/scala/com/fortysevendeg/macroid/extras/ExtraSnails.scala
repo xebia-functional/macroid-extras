@@ -24,7 +24,7 @@ object RevealSnails {
         }
       })
       view.setVisibility(VISIBLE)
-      anim.start
+      anim.start()
       animPromise.future
   }
 
@@ -42,7 +42,7 @@ object RevealSnails {
           animPromise.complete(Success(()))
         }
       })
-      anim.start
+      anim.start()
       animPromise.future
   }
 
@@ -50,7 +50,7 @@ object RevealSnails {
     view ⇒
       val animPromise = Promise[Unit]()
 
-      v.map{
+      v foreach {
         toView=>
           val finalX: Int = (toView.getX + (toView.getWidth / 2) - (view.getWidth / 2) - view.getX).asInstanceOf[Int]
           val finalY: Int = (toView.getY + (toView.getHeight / 2) - (view.getHeight / 2) - view.getY).asInstanceOf[Int]
@@ -60,7 +60,7 @@ object RevealSnails {
               super.onAnimationEnd(animation)
               animPromise.complete(Success(()))
             }
-          }).start
+          }).start()
 
       }
       animPromise.future
