@@ -9,4 +9,5 @@ trait DevicesQueries {
   def landscapeTablet(implicit ctx: AppContext) = widerThan(720 dp) & landscape
   def portraitTablet(implicit ctx: AppContext) = widerThan(720 dp) & portrait
 }
+
 object DevicesQueries extends DevicesQueries
