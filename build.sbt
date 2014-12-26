@@ -31,8 +31,8 @@ resolvers ++= Seq(
   "jcenter" at "http://jcenter.bintray.com",
   "Scalaz Bintray Repo" at "http://dl.bintray.com/scalaz/releases",
   "47deg Public" at "http://clinker.47deg.com/nexus/content/groups/public",
-  "47deg Public Snapshot Repository" at "http://clinker.47deg.com/nexus/content/repositories/snapshots",
-  "47deg Public Release Repository" at "http://clinker.47deg.com/nexus/content/repositories/releases"
+  "47deg Private Snapshot Repository" at "http://clinker.47deg.com/nexus/content/repositories/private-snapshots",
+  "47deg Private Release Repository" at "http://clinker.47deg.com/nexus/content/repositories/private-releases"
 )
 
 libraryDependencies ++= Seq(
@@ -46,9 +46,9 @@ publishMavenStyle := true
 publishTo <<= version {
   v: String =>
     if (v.trim.endsWith("SNAPSHOT"))
-      Some("47deg Public Snapshot Repository" at "http://clinker.47deg.com/nexus/content/repositories/snapshots")
+      Some("47deg Private Snapshot Repository" at "http://clinker.47deg.com/nexus/content/repositories/private-snapshots")
     else
-      Some("47deg Public Release Repository" at "http://clinker.47deg.com/nexus/content/repositories/releases")
+      Some("47deg Private Release Repository" at "http://clinker.47deg.com/nexus/content/repositories/private-releases")
 }
 
 startYear := Some(2015)
