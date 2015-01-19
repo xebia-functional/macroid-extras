@@ -46,9 +46,7 @@ object ExtraActions {
 
 object ExtraResources {
 
-  def resGetBoolean(resourceId: Int)(implicit c: AppContext): Boolean = {
-    c.get.getResources.getBoolean(resourceId)
-  }
+  def resGetBoolean(resourceId: Int)(implicit c: AppContext): Boolean = c.get.getResources.getBoolean(resourceId)
   
   def resGetBoolean(resource: String)(implicit c: AppContext): Option[Boolean] = {
     val resourceId = c.get.getResources.getIdentifier(resource, "boolean", c.get.getPackageName)
@@ -58,9 +56,7 @@ object ExtraResources {
     }
   }
 
-  def resGetColor(resourceId: Int)(implicit c: AppContext): Int = {
-    c.get.getResources.getColor(resourceId)
-  }
+  def resGetColor(resourceId: Int)(implicit c: AppContext): Int = c.get.getResources.getColor(resourceId)
   
   def resGetColor(resource: String)(implicit c: AppContext): Option[Int] = {
     val resourceId = c.get.getResources.getIdentifier(resource, "color", c.get.getPackageName)
@@ -70,9 +66,7 @@ object ExtraResources {
     }
   }
 
-  def resGetDimension(resourceId: Int)(implicit c: AppContext): Float = {
-    c.get.getResources.getDimension(resourceId)
-  }
+  def resGetDimension(resourceId: Int)(implicit c: AppContext): Float = c.get.getResources.getDimension(resourceId)
 
   def resGetDimension(resource: String)(implicit c: AppContext): Option[Float] = {
     val resourceId = c.get.getResources.getIdentifier(resource, "dimen", c.get.getPackageName)
@@ -82,9 +76,7 @@ object ExtraResources {
     }
   }
   
-  def resGetDrawable(resourceId: Int)(implicit c: AppContext): Drawable = {
-    c.get.getResources.getDrawable(resourceId)
-  }
+  def resGetDrawable(resourceId: Int)(implicit c: AppContext): Drawable = c.get.getResources.getDrawable(resourceId)
 
   def resGetDrawable(resource: String)(implicit c: AppContext): Option[Drawable] = {
     val resourceId = c.get.getResources.getIdentifier(resource, "drawable", c.get.getPackageName)
@@ -102,9 +94,7 @@ object ExtraResources {
     }
   }
 
-  def resGetInteger(resourceId: Int)(implicit c: AppContext): Int = {
-    c.get.getResources.getInteger(resourceId)
-  }
+  def resGetInteger(resourceId: Int)(implicit c: AppContext): Int = c.get.getResources.getInteger(resourceId)
 
   def resGetInteger(resource: String)(implicit c: AppContext): Option[Int] = {
     val resourceId = c.get.getResources.getIdentifier(resource, "integer", c.get.getPackageName)
@@ -114,13 +104,10 @@ object ExtraResources {
     }
   }
   
-  def resGetResourcePackageName(resourceId: Int)(implicit c: AppContext): String = {
+  def resGetResourcePackageName(resourceId: Int)(implicit c: AppContext): String = 
     c.get.getResources.getResourcePackageName(resourceId)
-  }
   
-  def resGetString(resourceId: Int)(implicit c: AppContext): String = {
-    c.get.getResources.getString(resourceId)
-  }
+  def resGetString(resourceId: Int)(implicit c: AppContext): String = c.get.getResources.getString(resourceId)
   
   def resGetString(resource: String)(implicit c: AppContext): Option[String] = {
     val resourceId = c.get.getResources.getIdentifier(resource, "string", c.get.getPackageName)
@@ -130,9 +117,8 @@ object ExtraResources {
     }
   }
 
-  def resGetString(resourceId: Int, formatArgs: String*)(implicit c: AppContext): String = {
+  def resGetString(resourceId: Int, formatArgs: String*)(implicit c: AppContext): String = 
     c.get.getResources.getString(resourceId, formatArgs)
-  }
 
   def resGetString(resource: String, formatArgs: String*)(implicit c: AppContext): Option[String] = {
     val resourceId = c.get.getResources.getIdentifier(resource, "strings", c.get.getPackageName)
