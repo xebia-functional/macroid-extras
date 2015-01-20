@@ -2,15 +2,9 @@ package com.fortysevendeg.macroid.extras
 
 import android.os.Bundle
 import android.support.v4.app.{Fragment, FragmentManager}
-import macroid.{AppContext, ActivityContext, FragmentBuilder, FragmentManagerContext}
+import macroid.{ActivityContext, FragmentBuilder, FragmentManagerContext}
 
 object ExtraFragment {
-
-  sealed trait FindBy
-
-  case object FIND_BY_ID extends FindBy
-
-  case object FIND_BY_TAG extends FindBy
 
   def addFragment[F <: Fragment](
       builder: FragmentBuilder[F],
