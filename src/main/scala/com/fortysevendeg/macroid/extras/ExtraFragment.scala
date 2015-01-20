@@ -2,9 +2,15 @@ package com.fortysevendeg.macroid.extras
 
 import android.os.Bundle
 import android.support.v4.app.{Fragment, FragmentManager}
-import macroid.{ActivityContext, FragmentBuilder, FragmentManagerContext}
+import macroid.{AppContext, ActivityContext, FragmentBuilder, FragmentManagerContext}
 
 object ExtraFragment {
+
+  sealed trait FindBy
+
+  case object FIND_BY_ID extends FindBy
+
+  case object FIND_BY_TAG extends FindBy
 
   def addFragment[F <: Fragment](
       builder: FragmentBuilder[F],
@@ -34,16 +40,23 @@ object ExtraFragment {
     }
   }
 
+  @deprecated("You should instead use `findTypedFragmentByTag`")
   def findFragmentByTag(tag: String)
       (implicit context: ActivityContext, managerContext: FragmentManagerContext[Fragment, FragmentManager]): Option[Fragment] = {
     Option(managerContext.manager.findFragmentByTag(tag))
   }
 
+  @deprecated("You should instead use `findTypedFragmentById`")
   def findFragmentById(id: Int)
       (implicit context: ActivityContext, managerContext: FragmentManagerContext[Fragment, FragmentManager]): Option[Fragment] = {
     Option(managerContext.manager.findFragmentById(id))
   }
 
+  def findTypedFragmentById[T <: Fragment](findParam: Int)
+      (implicit appContext: AppContext, context: ActivityContext, fragmentManager: FragmentManagerContext[Fragment, FragmentManager]): Option[T] =
+    findFragmentById(findParam) map (_.asInstanceOf[T])
 
-
+  def findTypedFragmentByTag[T <: Fragment](findParam: String)
+      (implicit appContext: AppContext, context: ActivityContext, fragmentManager: FragmentManagerContext[Fragment, FragmentManager]): Option[T] =
+    findFragmentByTag(findParam) map (_.asInstanceOf[T])
 }
