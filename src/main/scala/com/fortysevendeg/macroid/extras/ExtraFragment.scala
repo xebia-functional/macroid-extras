@@ -40,23 +40,23 @@ object ExtraFragment {
     }
   }
 
-  @deprecated("You should instead use `findTypedFragmentByTag`")
+  @deprecated("You should instead use `findTypedFragmentByTag`", "0.2")
   def findFragmentByTag(tag: String)
       (implicit context: ActivityContext, managerContext: FragmentManagerContext[Fragment, FragmentManager]): Option[Fragment] = {
     Option(managerContext.manager.findFragmentByTag(tag))
   }
 
-  @deprecated("You should instead use `findTypedFragmentById`")
+  @deprecated("You should instead use `findTypedFragmentById`", "0.2")
   def findFragmentById(id: Int)
       (implicit context: ActivityContext, managerContext: FragmentManagerContext[Fragment, FragmentManager]): Option[Fragment] = {
     Option(managerContext.manager.findFragmentById(id))
   }
 
-  def findTypedFragmentById[T <: Fragment](findParam: Int)
-      (implicit appContext: AppContext, context: ActivityContext, fragmentManager: FragmentManagerContext[Fragment, FragmentManager]): Option[T] =
-    findFragmentById(findParam) map (_.asInstanceOf[T])
+  def findTypedFragmentByTag[T <: Fragment](tag: String)
+      (implicit context: ActivityContext, managerContext: FragmentManagerContext[Fragment, FragmentManager]): Option[T] =
+    Option(managerContext.manager.findFragmentByTag(tag)) map (_.asInstanceOf[T])
 
-  def findTypedFragmentByTag[T <: Fragment](findParam: String)
-      (implicit appContext: AppContext, context: ActivityContext, fragmentManager: FragmentManagerContext[Fragment, FragmentManager]): Option[T] =
-    findFragmentByTag(findParam) map (_.asInstanceOf[T])
+  def findTypedFragmentById[T <: Fragment](id: Int)
+      (implicit context: ActivityContext, managerContext: FragmentManagerContext[Fragment, FragmentManager]): Option[T] =
+    Option(managerContext.manager.findFragmentById(id)) map (_.asInstanceOf[T])
 }
