@@ -34,23 +34,11 @@ object ExtraFragment {
     }
   }
 
-  @deprecated("You should instead use `findTypedFragmentByTag`", "0.2")
-  def findFragmentByTag(tag: String)
-      (implicit context: ActivityContext, managerContext: FragmentManagerContext[Fragment, FragmentManager]): Option[Fragment] = {
-    Option(managerContext.manager.findFragmentByTag(tag))
-  }
-
-  @deprecated("You should instead use `findTypedFragmentById`", "0.2")
-  def findFragmentById(id: Int)
-      (implicit context: ActivityContext, managerContext: FragmentManagerContext[Fragment, FragmentManager]): Option[Fragment] = {
-    Option(managerContext.manager.findFragmentById(id))
-  }
-
-  def findTypedFragmentByTag[T <: Fragment](tag: String)
+  def findFragmentByTag[T <: Fragment](tag: String)
       (implicit context: ActivityContext, managerContext: FragmentManagerContext[Fragment, FragmentManager]): Option[T] =
     Option(managerContext.manager.findFragmentByTag(tag)) map (_.asInstanceOf[T])
 
-  def findTypedFragmentById[T <: Fragment](id: Int)
+  def findFragmentById[T <: Fragment](id: Int)
       (implicit context: ActivityContext, managerContext: FragmentManagerContext[Fragment, FragmentManager]): Option[T] =
     Option(managerContext.manager.findFragmentById(id)) map (_.asInstanceOf[T])
 }
