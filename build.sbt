@@ -5,6 +5,8 @@ android.Plugin.androidBuildAar
 
 platformTarget in Android := Versions.androidPlatformV
 
+name := "macroid-extras"
+
 organization := "com.fortysevendeg"
 
 organizationName := "47 Degrees"
