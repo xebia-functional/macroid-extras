@@ -95,10 +95,10 @@ object ExtraResources {
   def resGetString(resource: String)(implicit c: AppContext): Option[String] =
     resGetResource(resource, "string")((c, resourceId) => c.get.getResources.getString(resourceId))
 
-  def resGetString(resourceId: Int, formatArgs: String*)(implicit c: AppContext): String =
-    c.get.getResources.getString(resourceId, formatArgs)
+  def resGetString(resourceId: Int, formatArgs: AnyRef*)(implicit c: AppContext): String =
+    c.get.getResources.getString(resourceId, formatArgs:_*)
 
   def resGetString(resource: String, formatArgs: AnyRef*)(implicit c: AppContext): Option[String] = {
-    resGetResource(resource, "string")((c, resourceId) => c.get.getResources.getString(resourceId, formatArgs))
+    resGetResource(resource, "string")((c, resourceId) => c.get.getResources.getString(resourceId, formatArgs:_*))
   }
 }
