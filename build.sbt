@@ -48,9 +48,9 @@ publishMavenStyle := true
 publishTo <<= version {
   v: String =>
     if (v.trim.endsWith("SNAPSHOT"))
-      Some("47deg Private Snapshot Repository" at "http://clinker.47deg.com/nexus/content/repositories/private-snapshots")
+      Some("47deg Public Snapshot Repository" at "http://clinker.47deg.com/nexus/content/repositories/snapshots")
     else
-      Some("47deg Private Release Repository" at "http://clinker.47deg.com/nexus/content/repositories/private-releases")
+      Some("47deg Public Release Repository" at "http://clinker.47deg.com/nexus/content/repositories/releases")
 }
 
 startYear := Some(2015)
