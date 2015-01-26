@@ -2,6 +2,7 @@ package com.fortysevendeg.macroid.extras
 
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
+import android.support.v4.widget.DrawerLayout
 import android.support.v7.widget.{CardView, RecyclerView, Toolbar}
 import android.util.TypedValue
 import android.view.ViewGroup.LayoutParams._
@@ -190,6 +191,12 @@ object TextTweaks {
   def tvText(text: String) = Tweak[W](_.setText(text))
 
   def tvText(text: Int) = Tweak[W](_.setText(text))
+
+  def tvHint(text: String) = Tweak[W](_.setHint(text))
+
+  def tvHint(text: Int) = Tweak[W](_.setHint(text))
+
+  def tvDrawablePadding(padding: Int) = Tweak[W](_.setCompoundDrawablePadding(padding))
 }
 
 object ToolbarTweaks {
@@ -207,4 +214,19 @@ object SeekBarTweaks {
   def sbMax(maxValue: Int) = Tweak[W](_.setMax(maxValue))
   def sbProgress(progressValue: Int) = Tweak[W](_.setProgress(progressValue))
   def sbOnSeekBarChangeListener(listener: OnSeekBarChangeListener) = Tweak[W](_.setOnSeekBarChangeListener(listener))
+}
+
+object DrawerLayoutTweaks {
+  type W = DrawerLayout
+
+  def dlContentSize(w: Int, h: Int) = lp[W](w, h)
+
+  val dlMatchWeightVertical = lp[W](MATCH_PARENT, 0, 1)
+  val dlMatchWeightHorizontal = lp[W](0, MATCH_PARENT, 1)
+
+  def dlLayoutGravity(gravity: Int) = Tweak[View] { view =>
+    val param = new DrawerLayout.LayoutParams(view.getLayoutParams.width, view.getLayoutParams.height)
+    param.gravity = gravity
+    view.setLayoutParams(param)
+  }
 }
