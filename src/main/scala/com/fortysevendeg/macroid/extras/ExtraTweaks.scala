@@ -3,7 +3,7 @@ package com.fortysevendeg.macroid.extras
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.support.v4.widget.DrawerLayout
-import android.support.v7.widget.{CardView, RecyclerView, Toolbar}
+import android.support.v7.widget.{Toolbar, CardView, RecyclerView}
 import android.util.TypedValue
 import android.view.ViewGroup.LayoutParams._
 import android.view.ViewGroup.MarginLayoutParams
@@ -206,6 +206,8 @@ object ToolbarTweaks {
 
   def tbTitle(title: Int) = Tweak[W](_.setTitle(title))
 
+  def tbTextColor(color: Int) = Tweak[W](_.setTitleTextColor(color))
+
 }
 
 object SeekBarTweaks {
@@ -228,5 +230,9 @@ object DrawerLayoutTweaks {
     val param = new DrawerLayout.LayoutParams(view.getLayoutParams.width, view.getLayoutParams.height)
     param.gravity = gravity
     view.setLayoutParams(param)
+  }
+  
+  def dlCloseDrawer(drawerMenuView: Option[View]) = Tweak[W] { view =>
+    drawerMenuView map (view.closeDrawer(_))
   }
 }
