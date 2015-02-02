@@ -16,14 +16,16 @@
 
 package com.fortysevendeg.macroid.extras
 
-import macroid.AppContext
-import macroid.FullDsl._
-import scala.language.postfixOps
+import android.preference.{Preference, PreferenceFragment}
 
-trait DeviceMediaQueries {
-  def tablet(implicit ctx: AppContext) = widerThan(720 dp)
-  def landscapeTablet(implicit ctx: AppContext) = widerThan(720 dp) & landscape
-  def portraitTablet(implicit ctx: AppContext) = widerThan(720 dp) & portrait
+object PreferencesBuildingExtra {
+
+  def connect[W <: Preference](preference: String)(implicit root: RootPreferencesFragment): Option[W] = {
+    Some(root.fragment.findPreference(preference).asInstanceOf[W])
+  }
+
 }
 
-object DeviceMediaQueries extends DeviceMediaQueries
+case class RootPreferencesFragment(fragment: PreferenceFragment, preferenceResId: Int) {
+  fragment.addPreferencesFromResource(preferenceResId)
+}

@@ -31,10 +31,7 @@ resolvers ++= Seq(
   Resolver.sonatypeRepo("snapshots"),
   Resolver.defaultLocal,
   "jcenter" at "http://jcenter.bintray.com",
-  "Scalaz Bintray Repo" at "http://dl.bintray.com/scalaz/releases",
-  "47deg Public" at "http://clinker.47deg.com/nexus/content/groups/public",
-  "47deg Private Snapshot Repository" at "http://clinker.47deg.com/nexus/content/repositories/private-snapshots",
-  "47deg Private Release Repository" at "http://clinker.47deg.com/nexus/content/repositories/private-releases"
+  "47deg Public" at "http://clinker.47deg.com/nexus/content/groups/public"
 )
 
 libraryDependencies ++= Seq(

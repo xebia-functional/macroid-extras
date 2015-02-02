@@ -16,14 +16,15 @@
 
 package com.fortysevendeg.macroid.extras
 
+import android.view.{LayoutInflater, ViewGroup}
 import macroid.AppContext
-import macroid.FullDsl._
-import scala.language.postfixOps
 
-trait DeviceMediaQueries {
-  def tablet(implicit ctx: AppContext) = widerThan(720 dp)
-  def landscapeTablet(implicit ctx: AppContext) = widerThan(720 dp) & landscape
-  def portraitTablet(implicit ctx: AppContext) = widerThan(720 dp) & portrait
+object LayoutBuildingExtra {
+
+  def connect[W](id: Int)(implicit root: RootView): Option[W] = Some(root.view.findViewById(id).asInstanceOf[W])
+
 }
 
-object DeviceMediaQueries extends DeviceMediaQueries
+class RootView(layout: Int)(implicit appContext: AppContext) {
+  val view = LayoutInflater.from(appContext.get).inflate(layout, null).asInstanceOf[ViewGroup]
+}
