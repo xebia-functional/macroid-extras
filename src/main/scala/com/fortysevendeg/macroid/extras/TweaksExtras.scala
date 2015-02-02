@@ -18,6 +18,7 @@ package com.fortysevendeg.macroid.extras
 
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
+import android.support.v4.widget.DrawerLayout
 import android.support.v7.widget.{CardView, RecyclerView, Toolbar}
 import android.util.TypedValue
 import android.view.ViewGroup.LayoutParams._
@@ -25,6 +26,7 @@ import android.view.ViewGroup.MarginLayoutParams
 import android.view.{View, ViewGroup}
 import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget._
+import com.fortysevendeg.macroid.extras.{DrawerLayoutTweaks, TextTweaks}
 import macroid.FullDsl._
 import macroid.{AppContext, Tweak}
 
@@ -234,6 +236,13 @@ object TextTweaks {
   def tvText(text: String): Tweak[W] = Tweak[W](_.setText(text))
 
   def tvText(text: Int): Tweak[W] = Tweak[W](_.setText(text))
+
+  def tvDrawablePadding(padding: Int): Tweak[W] = Tweak[W](_.setCompoundDrawablePadding(padding))
+
+  def tvHint(text: String): Tweak[W] = Tweak[W](_.setHint(text))
+
+  def tvHint(text: Int): Tweak[W] = Tweak[W](_.setHint(text))
+
 }
 
 object ToolbarTweaks {
@@ -242,6 +251,8 @@ object ToolbarTweaks {
   def tbTitle(title: String): Tweak[W] = Tweak[W](_.setTitle(title))
 
   def tbTitle(title: Int): Tweak[W] = Tweak[W](_.setTitle(title))
+
+  def tbTextColor(color: Int): Tweak[W] = Tweak[W](_.setTitleTextColor(color))
 
 }
 
@@ -253,4 +264,23 @@ object SeekBarTweaks {
   def sbProgress(progressValue: Int): Tweak[W] = Tweak[W](_.setProgress(progressValue))
 
   def sbOnSeekBarChangeListener(listener: OnSeekBarChangeListener): Tweak[W] = Tweak[W](_.setOnSeekBarChangeListener(listener))
+}
+
+object DrawerLayoutTweaks {
+  type W = DrawerLayout
+
+  def dlContentSize(w: Int, h: Int): Tweak[View] = lp[W](w, h)
+
+  val dlMatchWeightVertical: Tweak[View] = lp[W](MATCH_PARENT, 0, 1)
+  val dlMatchWeightHorizontal: Tweak[View] = lp[W](0, MATCH_PARENT, 1)
+
+  def dlLayoutGravity(gravity: Int): Tweak[View] = Tweak[View] { view =>
+    val param = new DrawerLayout.LayoutParams(view.getLayoutParams.width, view.getLayoutParams.height)
+    param.gravity = gravity
+    view.setLayoutParams(param)
+  }
+
+  def dlCloseDrawer(drawerMenuView: Option[View]): Tweak[W] = Tweak[W] { view =>
+    drawerMenuView map view.closeDrawer
+  }
 }
