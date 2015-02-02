@@ -1,0 +1,7 @@
+# InteliJ IDEA
+.idea
+
+# SBT
+/target/
+/project/target
+/project/project/target
