@@ -7,15 +7,15 @@ import macroid.FullDsl._
 import macroid.Ui
 import scala.language.implicitConversions
 
-object ExtraSeekBarEvents {
+object SeekBarEventsExtras {
 
   case class OnSeekBarChangeListenerHandler(
-      onProgressChangedHandler: (SeekBar, Int, Boolean) =>
-          Ui[Option[View]] = (seekBar: SeekBar, progress: Int, fromUser: Boolean) => Ui(Some(seekBar)),
-      onStopTrackingTouchHandler: (SeekBar) =>
-          Ui[Option[View]] = (seekBar: SeekBar) => Ui(Some(seekBar)),
-      onStartTrackingTouchHandler: (SeekBar) =>
-          Ui[Option[View]] = (seekBar: SeekBar) => Ui(Some(seekBar))
+      onProgressChangedHandler: (SeekBar, Int, Boolean) ⇒
+          Ui[Option[View]] = (seekBar: SeekBar, progress: Int, fromUser: Boolean) ⇒ Ui(Some(seekBar)),
+      onStopTrackingTouchHandler: (SeekBar) ⇒
+          Ui[Option[View]] = (seekBar: SeekBar) ⇒ Ui(Some(seekBar)),
+      onStartTrackingTouchHandler: (SeekBar) ⇒
+          Ui[Option[View]] = (seekBar: SeekBar) ⇒ Ui(Some(seekBar))
       )
 
   implicit def onSeekBarChangeListener(listener: OnSeekBarChangeListenerHandler): OnSeekBarChangeListener = {

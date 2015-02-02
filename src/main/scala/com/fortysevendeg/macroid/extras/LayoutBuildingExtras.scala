@@ -5,9 +5,7 @@ import macroid.AppContext
 
 object LayoutBuildingExtra {
 
-  def connect[W](id: Int)(implicit root: RootView): Option[W] = {
-    Some(root.view.findViewById(id).asInstanceOf[W])
-  }
+  def connect[W](id: Int)(implicit root: RootView): Option[W] = Some(root.view.findViewById(id).asInstanceOf[W])
 
 }
 

@@ -10,7 +10,7 @@ import scala.util.Success
 
 object RevealSnails {
 
-  val showCircularReveal = Snail[View] {
+  val showCircularReveal: Snail[View] = Snail[View] {
     view ⇒
       val animPromise = Promise[Unit]()
       val x = view.getWidth / 2
@@ -28,7 +28,7 @@ object RevealSnails {
       animPromise.future
   }
 
-  val hideCircularReveal = Snail[View] {
+  val hideCircularReveal: Snail[View] = Snail[View] {
     view ⇒
       val animPromise = Promise[Unit]()
       val x = view.getWidth / 2
@@ -46,12 +46,12 @@ object RevealSnails {
       animPromise.future
   }
 
-  def move(v: Option[View]) = Snail[View] {
+  def move(v: Option[View]): Snail[View] = Snail[View] {
     view ⇒
       val animPromise = Promise[Unit]()
 
       v foreach {
-        toView=>
+        toView ⇒
           val finalX: Int = (toView.getX + (toView.getWidth / 2) - (view.getWidth / 2) - view.getX).asInstanceOf[Int]
           val finalY: Int = (toView.getY + (toView.getHeight / 2) - (view.getHeight / 2) - view.getY).asInstanceOf[Int]
 
@@ -70,7 +70,7 @@ object RevealSnails {
 
 object SnailsUtils {
 
-  def calculateRadius(x : Int = 0, y : Int = 0, width : Int = 0, height : Int = 0) = {
+  def calculateRadius(x : Int = 0, y : Int = 0, width : Int = 0, height : Int = 0): Int = {
     val catheti1: Int = if (x < width / 2) width - x else x
     val catheti2: Int = if (y < height / 2) height - y else y
     Math.sqrt((catheti1 * catheti1) + (catheti2 * catheti2)).asInstanceOf[Int]

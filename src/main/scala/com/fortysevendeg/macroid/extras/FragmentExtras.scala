@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.support.v4.app.{Fragment, FragmentManager}
 import macroid.{ActivityContext, FragmentBuilder, FragmentManagerContext}
 
-object ExtraFragment {
+object FragmentExtras {
 
   def addFragment[F <: Fragment](
       builder: FragmentBuilder[F],
@@ -12,8 +12,8 @@ object ExtraFragment {
       id: Option[Int] = None,
       tag: Option[String] = None)
       (implicit context: ActivityContext, managerContext: FragmentManagerContext[Fragment, FragmentManager]) = {
-    builder.pass(args.getOrElse(new Bundle())).factory map {
-      managerContext.manager.beginTransaction().add(id.getOrElse(0), _, tag.getOrElse("")).commit()
+    builder.pass(args getOrElse new Bundle()).factory map {
+      managerContext.manager.beginTransaction().add(id.getOrElse(0), _, tag getOrElse "").commit()
     }
   }
 
@@ -28,8 +28,8 @@ object ExtraFragment {
       id: Int,
       tag: Option[String] = None)
       (implicit context: ActivityContext, managerContext: FragmentManagerContext[Fragment, FragmentManager]) = {
-    builder.pass(args).factory.map {
-      fragment =>
+    builder.pass(args).factory map {
+      fragment ⇒
         managerContext.manager.beginTransaction().replace(id, fragment, tag.orNull).commit()
     }
   }
