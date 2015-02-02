@@ -8,6 +8,22 @@ Used in:
 
 - [Translate Bubble](https://github.com/47deg/translate-bubble-android)
 
+Usage
+======
+
+```scala
+
+resolvers ++= Seq(
+    ...
+    Resolver.mavenLocal,
+    "47deg Public" at "http://clinker.47deg.com/nexus/content/groups/public"
+)
+
+libraryDependencies ++= Seq(
+  aar("com.fortysevendeg" %% "macroid-extras" % "<Version | 0.1-SNPASHOT>")
+
+```
+
 License
 ======
 
