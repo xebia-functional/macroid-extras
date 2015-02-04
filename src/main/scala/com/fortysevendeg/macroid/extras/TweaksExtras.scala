@@ -16,17 +16,18 @@
 
 package com.fortysevendeg.macroid.extras
 
-import android.graphics.Typeface
 import android.graphics.drawable.Drawable
+import android.graphics.{Bitmap, Typeface}
+import android.net.Uri
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.widget.{CardView, RecyclerView, Toolbar}
 import android.util.TypedValue
 import android.view.ViewGroup.LayoutParams._
 import android.view.ViewGroup.MarginLayoutParams
 import android.view.{View, ViewGroup}
+import android.widget.ImageView.ScaleType
 import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget._
-import com.fortysevendeg.macroid.extras.{DrawerLayoutTweaks, TextTweaks}
 import macroid.FullDsl._
 import macroid.{AppContext, Tweak}
 
@@ -104,6 +105,23 @@ object ImageViewTweaks {
   def ivSrc(drawable: Drawable): Tweak[W] = Tweak[W](_.setImageDrawable(drawable))
 
   def ivSrc(res: Int): Tweak[W] = Tweak[W](_.setImageResource(res))
+
+  def ivSrc(bitmap: Bitmap): Tweak[W] = Tweak[W](_.setImageBitmap(bitmap))
+
+  def ivSrc(uri: Uri): Tweak[W] = Tweak[W](_.setImageURI(uri))
+
+  def ivScaleType(scaleType: ScaleType): Tweak[W] = Tweak[W](_.setScaleType(scaleType))
+
+  def ivCropToPadding(cropToPadding: Boolean): Tweak[W] = Tweak[W](_.setCropToPadding(cropToPadding))
+
+  def ivBaseline(baseline: Int): Tweak[W] = Tweak[W](_.setBaseline(baseline))
+
+  def ivBaselineAlignBottom(aligned: Boolean): Tweak[W] = Tweak[W](_.setBaselineAlignBottom(aligned))
+
+  def ivImageAlpha(alpha: Int): Tweak[W] = Tweak[W](_.setImageAlpha(alpha))
+
+  def ivAdjustViewBounds(adjustViewBounds: Boolean): Tweak[W] = Tweak[W](_.setAdjustViewBounds(adjustViewBounds))
+
 }
 
 object LinearLayoutTweaks {
@@ -189,7 +207,18 @@ object TableRowTweaks {
 object RecyclerViewTweaks {
   type W = RecyclerView
 
-  val fixedSize: Tweak[W] = Tweak[W](_.setHasFixedSize(true))
+  val rvFixedSize: Tweak[W] = Tweak[W](_.setHasFixedSize(true))
+
+  val rvNoFixedSize: Tweak[W] = Tweak[W](_.setHasFixedSize(false))
+
+  def rvLayoutManager(layoutManager: RecyclerView.LayoutManager): Tweak[W] = Tweak[W](_.setLayoutManager(layoutManager))
+
+  def rvAdapter[VH <: RecyclerView.ViewHolder](adapter: RecyclerView.Adapter[VH]): Tweak[W] = Tweak[W](_.setAdapter(adapter))
+
+  def rvAddItemDecoration(decoration: RecyclerView.ItemDecoration): Tweak[W] = Tweak[W](_.addItemDecoration(decoration))
+
+  def rvItemAnimator(animator: RecyclerView.ItemAnimator): Tweak[W] = Tweak[W](_.setItemAnimator(animator))
+
 }
 
 object CardViewTweaks {
@@ -202,6 +231,9 @@ object TextTweaks {
   type W = TextView
 
   def tvColor(color: Int): Tweak[W] = Tweak[W](_.setTextColor(color))
+
+  def tvColorResource(resColor: Int)(implicit appContext: AppContext): Tweak[W] =
+    Tweak[W](_.setTextColor(appContext.get.getResources.getColor(resColor)))
 
   val tvBold: Tweak[W] = Tweak[W](x ⇒ x.setTypeface(x.getTypeface, Typeface.BOLD))
 
@@ -242,6 +274,12 @@ object TextTweaks {
   def tvHint(text: String): Tweak[W] = Tweak[W](_.setHint(text))
 
   def tvHint(text: Int): Tweak[W] = Tweak[W](_.setHint(text))
+
+  def tvCompoundDrawablesWithIntrinsicBounds(
+      left: Int,
+      top: Int,
+      right: Int,
+      bottom: Int): Tweak[W] = Tweak[W](_.setCompoundDrawablesWithIntrinsicBounds(left, top, right, bottom))
 
 }
 
