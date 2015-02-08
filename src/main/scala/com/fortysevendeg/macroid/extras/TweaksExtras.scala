@@ -46,6 +46,10 @@ object ViewTweaks {
 
   def vContentSizeMatchHeight(w: Int): Tweak[View] = lp[ViewGroup](w, MATCH_PARENT)
 
+  def vMinHeight(height: Int): Tweak[W] = Tweak[W](_.setMinimumHeight(height))
+
+  def vMinWidth(width: Int): Tweak[W] = Tweak[W](_.setMinimumWidth(width))
+
   def vMargins(margin: Int): Tweak[W] = Tweak[W] {
     _.getLayoutParams match {
       case lp: MarginLayoutParams ⇒
@@ -81,6 +85,9 @@ object ViewTweaks {
 
   def vBackgroundColor(color: Int): Tweak[W] = Tweak[W](_.setBackgroundColor(color))
 
+  def vBackgroundColorResource(color: Int)(implicit appContext: AppContext): Tweak[W] =
+    Tweak[W](_.setBackgroundColor(appContext.get.getResources.getColor(color)))
+
   def vBackground(drawable: Drawable): Tweak[W] = Tweak[W](_.setBackground(drawable))
 
   def vTag(tag: String): Tweak[W] = Tweak[W](_.setTag(tag))
@@ -97,6 +104,27 @@ object ViewTweaks {
 
   val vInvisible: Tweak[View] = Tweak[View](_.setVisibility(View.INVISIBLE))
 
+  def vScrollBarStyle(style: Int): Tweak[W] = Tweak[W](_.setScrollBarStyle(style))
+
+}
+
+object ViewGroupTweaks {
+  type W = ViewGroup
+
+  def vgAddView[V <: View](view: V): Tweak[W] = Tweak[W](_.addView(view))
+
+  def vgAddViews[V <: View](views: Seq[V]): Tweak[W] = Tweak[W] {
+    rootView =>
+      views map (rootView.addView(_))
+  }
+
+  val vgRemoveAllViews: Tweak[W] = Tweak[W](_.removeAllViews())
+
+  def vgRemoveView(view: View): Tweak[W] = Tweak[W](_.removeView(view))
+
+  def vgRemoveViewAt(index: Int): Tweak[W] = Tweak[W](_.removeViewAt(index))
+
+  def vgClipToPadding(clip: Boolean): Tweak[W] = Tweak[W](_.setClipToPadding(clip))
 }
 
 object ImageViewTweaks {
@@ -121,6 +149,15 @@ object ImageViewTweaks {
   def ivImageAlpha(alpha: Int): Tweak[W] = Tweak[W](_.setImageAlpha(alpha))
 
   def ivAdjustViewBounds(adjustViewBounds: Boolean): Tweak[W] = Tweak[W](_.setAdjustViewBounds(adjustViewBounds))
+
+}
+
+object ScrollViewTweaks {
+  type W = ScrollView
+
+  val svRemoveVerticalScrollBar: Tweak[W] = Tweak[W](_.setVerticalScrollBarEnabled(false))
+
+  val svRemoveHorizontalScrollBar: Tweak[W] = Tweak[W](_.setHorizontalScrollBarEnabled(false))
 
 }
 
@@ -262,6 +299,10 @@ object TextTweaks {
   def tvLines(lines: Int): Tweak[W] = Tweak[W](_.setLines(lines))
 
   def tvMaxLines(lines: Int): Tweak[W] = Tweak[W](_.setMaxLines(lines))
+
+  def tvMinLines(lines: Int): Tweak[W] = Tweak[W](_.setMinLines(lines))
+
+  val tvAllCaps: Tweak[W] = Tweak[W](_.setAllCaps(true))
 
   def tvGravity(gravity: Int): Tweak[W] = Tweak[W](_.setGravity(gravity))
 
