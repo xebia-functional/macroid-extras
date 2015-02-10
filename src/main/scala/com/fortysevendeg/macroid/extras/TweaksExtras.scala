@@ -21,10 +21,12 @@ import android.graphics.{Bitmap, Typeface}
 import android.net.Uri
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.widget.{CardView, RecyclerView, Toolbar}
+import android.text.{Spanned, Spannable}
 import android.util.TypedValue
 import android.view.ViewGroup.LayoutParams._
 import android.view.ViewGroup.MarginLayoutParams
 import android.view.{View, ViewGroup}
+import android.webkit.{WebViewClient, WebView}
 import android.widget.ImageView.ScaleType
 import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget._
@@ -125,6 +127,15 @@ object ViewGroupTweaks {
   def vgRemoveViewAt(index: Int): Tweak[W] = Tweak[W](_.removeViewAt(index))
 
   def vgClipToPadding(clip: Boolean): Tweak[W] = Tweak[W](_.setClipToPadding(clip))
+}
+
+object WebViewTweaks {
+  type W = WebView
+
+  def wvLoadUrl(url: String): Tweak[W] = Tweak[W](_.loadUrl(url))
+
+  def wvClient(webViewClient: WebViewClient): Tweak[W] = Tweak[W](_.setWebViewClient(webViewClient))
+
 }
 
 object ImageViewTweaks {
@@ -309,6 +320,10 @@ object TextTweaks {
   def tvText(text: String): Tweak[W] = Tweak[W](_.setText(text))
 
   def tvText(text: Int): Tweak[W] = Tweak[W](_.setText(text))
+
+  def tvText(text: Spannable): Tweak[W] = Tweak[W](_.setText(text))
+
+  def tvText(text: Spanned): Tweak[W] = Tweak[W](_.setText(text))
 
   def tvDrawablePadding(padding: Int): Tweak[W] = Tweak[W](_.setCompoundDrawablePadding(padding))
 
