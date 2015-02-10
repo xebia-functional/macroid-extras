@@ -33,7 +33,7 @@ object DeviceMediaQueries {
 
 object DeviceVersion {
 
-  lazy val sdkVersion: Int = Build.VERSION.SDK_INT
+  val sdkVersion: Int = Build.VERSION.SDK_INT
 
   def versionLowerTo(version: Int): Boolean = sdkVersion < version
 
