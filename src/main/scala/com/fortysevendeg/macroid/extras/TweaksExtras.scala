@@ -16,7 +16,7 @@
 
 package com.fortysevendeg.macroid.extras
 
-import android.graphics.drawable.Drawable
+import android.graphics.drawable.{TransitionDrawable, Drawable}
 import android.graphics.{Bitmap, Typeface}
 import android.net.Uri
 import android.support.v4.widget.DrawerLayout
@@ -107,6 +107,12 @@ object ViewTweaks {
   val vInvisible: Tweak[View] = Tweak[View](_.setVisibility(View.INVISIBLE))
 
   def vScrollBarStyle(style: Int): Tweak[W] = Tweak[W](_.setScrollBarStyle(style))
+  
+  def vBackgroundTransition(durationMilis: Int, reverse: Boolean = false): Tweak[W] = Tweak[W] {
+    view ⇒
+      val transitionBackground = view.getBackground.asInstanceOf[TransitionDrawable]
+      if (reverse) transitionBackground.reverseTransition(durationMilis) else transitionBackground.startTransition(durationMilis)
+  }
 
 }
 
@@ -219,6 +225,9 @@ object FrameLayoutTweaks {
     view.setLayoutParams(param)
   }
 
+  def flForeground(drawable: Drawable): Tweak[W] = Tweak[W](_.setForeground(drawable))
+
+  def flForegroundGravity(foregroundGravity: Int): Tweak[W] = Tweak[W](_.setForegroundGravity(foregroundGravity))
 }
 
 object TableLayoutTweaks {
