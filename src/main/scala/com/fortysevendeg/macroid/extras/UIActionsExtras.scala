@@ -30,6 +30,18 @@ object UIActionsExtras {
   def uiStartActivityForResult[T <: Activity](result: Int)(implicit c: ActivityContext, m: Manifest[T]): Ui[Unit] =
     Ui(c.get.startActivityForResult(new Intent(c.get, m.runtimeClass), result))
 
+  def uiShortToast(msg: Int)(implicit c: AppContext): Ui[Unit] =
+    Ui(Toast.makeText(c.get, msg, Toast.LENGTH_SHORT).show())
+
+  def uiLongToast(msg: Int)(implicit c: AppContext): Ui[Unit] =
+    Ui(Toast.makeText(c.get, msg, Toast.LENGTH_LONG).show())
+
+  def uiShortToast(msg: String)(implicit c: AppContext): Ui[Unit] =
+    Ui(Toast.makeText(c.get, msg, Toast.LENGTH_SHORT).show())
+
+  def uiLongToast(msg: String)(implicit c: AppContext): Ui[Unit] =
+    Ui(Toast.makeText(c.get, msg, Toast.LENGTH_LONG).show())
+
 }
 
 object ActionsExtras {
@@ -54,10 +66,16 @@ object ActionsExtras {
     c.get.startActivityForResult(intent, result)
   }
 
-  def aShortToast(msg: String)(implicit c: AppContext) =
+  def aShortToast(msg: Int)(implicit c: AppContext): Unit =
     Toast.makeText(c.get, msg, Toast.LENGTH_SHORT).show()
 
-  def aLongToast(msg: String)(implicit c: AppContext) =
+  def aLongToast(msg: Int)(implicit c: AppContext): Unit =
+    Toast.makeText(c.get, msg, Toast.LENGTH_LONG).show()
+
+  def aShortToast(msg: String)(implicit c: AppContext): Unit =
+    Toast.makeText(c.get, msg, Toast.LENGTH_SHORT).show()
+
+  def aLongToast(msg: String)(implicit c: AppContext): Unit =
     Toast.makeText(c.get, msg, Toast.LENGTH_LONG).show()
 
 }
