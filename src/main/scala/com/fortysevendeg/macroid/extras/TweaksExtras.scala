@@ -75,6 +75,10 @@ object ViewTweaks {
 
   def vPaddings(padding: Int): Tweak[W] = Tweak[W](_.setPadding(padding, padding, padding, padding))
 
+  def vPaddings(
+      paddingLeftRight: Int = 0,
+      paddingTopBottom: Int = 0): Tweak[W] = Tweak[W](_.setPadding(paddingLeftRight, paddingTopBottom, paddingLeftRight, paddingTopBottom))
+
   def vPadding(
       paddingLeft: Int = 0,
       paddingTop: Int = 0,
