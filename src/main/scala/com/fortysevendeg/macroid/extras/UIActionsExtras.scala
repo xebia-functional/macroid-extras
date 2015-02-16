@@ -107,6 +107,11 @@ object ResourcesExtras {
   def resGetDimension(resource: String)(implicit c: AppContext): Option[Float] =
     resGetResource(resource, "dimen")((c, resourceId) ⇒ c.get.getResources.getDimension(resourceId))
 
+  def resGetDimensionPixelSize(resourceId: Int)(implicit c: AppContext): Int = c.get.getResources.getDimensionPixelSize(resourceId)
+
+  def resGetDimensionPixelSize(resource: String)(implicit c: AppContext): Option[Int] =
+    resGetResource(resource, "dimen")((c, resourceId) ⇒ c.get.getResources.getDimensionPixelSize(resourceId))
+
   def resGetDrawable(resourceId: Int)(implicit c: AppContext): Drawable = c.get.getResources.getDrawable(resourceId)
 
   def resGetDrawable(resource: String)(implicit c: AppContext): Option[Drawable] =
