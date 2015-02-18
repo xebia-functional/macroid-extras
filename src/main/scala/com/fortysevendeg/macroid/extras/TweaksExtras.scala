@@ -21,6 +21,7 @@ import android.graphics.{Bitmap, Typeface}
 import android.net.Uri
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.widget.{CardView, RecyclerView, Toolbar}
+import android.text.TextUtils.TruncateAt
 import android.text.{Spanned, Spannable}
 import android.util.TypedValue
 import android.view.ViewGroup.LayoutParams._
@@ -325,6 +326,8 @@ object TextTweaks {
   def tvMaxLines(lines: Int): Tweak[W] = Tweak[W](_.setMaxLines(lines))
 
   def tvMinLines(lines: Int): Tweak[W] = Tweak[W](_.setMinLines(lines))
+
+  def tvEllipsize(truncateAt: TruncateAt): Tweak[W] = Tweak[W](_.setEllipsize(truncateAt))
 
   val tvAllCaps: Tweak[W] = Tweak[W](_.setAllCaps(true))
 
