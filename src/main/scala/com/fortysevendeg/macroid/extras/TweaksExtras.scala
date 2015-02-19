@@ -97,6 +97,8 @@ object ViewTweaks {
 
   def vBackground(drawable: Drawable): Tweak[W] = Tweak[W](_.setBackground(drawable))
 
+  val vBlankBackground = Tweak[W](_.setBackground(null))
+
   def vTag(tag: String): Tweak[W] = Tweak[W](_.setTag(tag))
 
   def vTransformation(x: Int = 0, y: Int = 0): Tweak[W] = Tweak[W] {
