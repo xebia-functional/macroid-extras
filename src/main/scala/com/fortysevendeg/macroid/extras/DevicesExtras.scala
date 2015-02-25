@@ -33,11 +33,64 @@ object DeviceMediaQueries {
 
 object DeviceVersion {
 
-  val sdkVersion: Int = Build.VERSION.SDK_INT
+  sealed trait SDKVersion {
+    def version: Int
 
-  def versionLowerTo(version: Int): Boolean = sdkVersion < version
+    def ==(a: SDKVersion) = this.version == a.version
 
-  def versionUpperOrEqualTo(version: Int): Boolean = sdkVersion >= version
+    def >=(a: SDKVersion) = this.version >= a.version
+
+    def >(a: SDKVersion) = this.version > a.version
+
+    def <=(a: SDKVersion) = this.version <= a.version
+
+    def <(a: SDKVersion) = this.version < a.version
+
+    def !=(a: SDKVersion) = this.version != a.version
+
+    def ==[A](f : => A) : Option[A] = if (this == currentVersion) Some(f) else None
+
+    def >=[A](f : => A) : Option[A] = if (this >= currentVersion) Some(f) else None
+
+    def >[A](f : => A) : Option[A] = if (this > currentVersion) Some(f) else None
+
+    def <=[A](f : => A) : Option[A] = if (this <= currentVersion) Some(f) else None
+
+    def <[A](f : => A) : Option[A] = if (this < currentVersion) Some(f) else None
+
+    def !=[A](f : => A) : Option[A] = if (this != currentVersion) Some(f) else None
+
+  }
+
+  object SDKVersion {
+
+    def unapply(c: SDKVersion): Int = c.version
+
+  }
+
+  class Version(v: Int) extends SDKVersion {
+    override def version: Int = v
+  }
+
+  import Build.VERSION._
+  import Build.VERSION_CODES._
+
+  case object currentVersion extends Version(SDK_INT)
+
+  case object Lollipop extends Version(LOLLIPOP)
+
+  case object KitKatWatch extends Version(KITKAT_WATCH)
+
+  case object KitKat extends Version(KITKAT)
+
+  case object JellyBeanMR2 extends Version(Build.VERSION_CODES.JELLY_BEAN_MR2)
+
+  case object JellyBeanMR1 extends Version(Build.VERSION_CODES.JELLY_BEAN_MR1)
+
+  case object JellyBean extends Version(Build.VERSION_CODES.JELLY_BEAN)
+
+  case object IceCreamSandwichMR1 extends Version(Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1)
+
+  case object IceCreamSandwich extends Version(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 
 }
-

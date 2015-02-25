@@ -17,8 +17,9 @@
 package com.fortysevendeg.macroid.extras
 
 import android.graphics.drawable.{TransitionDrawable, Drawable}
-import android.graphics.{Bitmap, Typeface}
+import android.graphics.{Outline, Bitmap, Typeface}
 import android.net.Uri
+import android.support.v4.view.ViewCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.widget.{CardView, RecyclerView, Toolbar}
 import android.text.TextUtils.TruncateAt
@@ -26,7 +27,7 @@ import android.text.{Spanned, Spannable}
 import android.util.TypedValue
 import android.view.ViewGroup.LayoutParams._
 import android.view.ViewGroup.MarginLayoutParams
-import android.view.{View, ViewGroup}
+import android.view.{ViewOutlineProvider, View, ViewGroup}
 import android.webkit.{WebViewClient, WebView}
 import android.widget.ImageView.ScaleType
 import android.widget.SeekBar.OnSeekBarChangeListener
@@ -120,6 +121,31 @@ object ViewTweaks {
       val transitionBackground = view.getBackground.asInstanceOf[TransitionDrawable]
       if (reverse) transitionBackground.reverseTransition(durationMilis) else transitionBackground.startTransition(durationMilis)
   }
+
+  val vCircleOutlineProvider: Tweak[W] = Tweak[W] {
+    view =>
+      view.setOutlineProvider(new ViewOutlineProvider() {
+        override def getOutline(view: ViewTweaks.W, outline: Outline): Unit = {
+          outline.setOval(0, 0, view.getWidth, view.getHeight)
+        }
+      })
+      view.setClipToOutline(true)
+  }
+
+  def vOutlineProvider(viewOutlineProvider: ViewOutlineProvider): Tweak[W] = Tweak[W] {
+    view =>
+      view.setOutlineProvider(viewOutlineProvider)
+      view.setClipToOutline(true)
+  }
+
+  def vElevation(elevation: Float): Tweak[W] = Tweak[W] (_.setElevation(elevation))
+
+}
+
+object ViewCompatTweaks {
+  type W = View
+
+  def vcElevation(elevation: Float): Tweak[W] = Tweak[W] (ViewCompat.setElevation(_, elevation))
 
 }
 
