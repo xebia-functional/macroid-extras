@@ -51,7 +51,7 @@ object DeviceVersion {
 
     def withOpThan[A](op: => Boolean)(f : => A) : Option[A] = if (op) Some(f) else None
 
-    def isEqualThen[A](f : => A) : Option[A] = withOpThan(this == CurrentVersion)(f)
+    def ifEqualThen[A](f : => A) : Option[A] = withOpThan(this == CurrentVersion)(f)
 
     def isNotEqualThen[A](f : => A) : Option[A] = withOpThan(this != CurrentVersion)(f)
 
