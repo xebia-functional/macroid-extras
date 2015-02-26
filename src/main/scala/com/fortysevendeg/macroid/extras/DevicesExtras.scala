@@ -20,6 +20,7 @@ import android.os.Build
 import macroid.AppContext
 import macroid.FullDsl._
 import scala.language.postfixOps
+import scala.reflect.ClassTag
 
 object DeviceMediaQueries {
 
@@ -48,17 +49,19 @@ object DeviceVersion {
 
     def !=(a: SDKVersion) = this.version != a.version
 
-    def ==[A](f : => A) : Option[A] = if (this == currentVersion) Some(f) else None
+    def withOpThan[A](op: => Boolean)(f : => A) : Option[A] = if (op) Some(f) else None
 
-    def >=[A](f : => A) : Option[A] = if (this >= currentVersion) Some(f) else None
+    def whenEqualThan[A](f : => A) : Option[A] = withOpThan(this == CurrentVersion)(f)
 
-    def >[A](f : => A) : Option[A] = if (this > currentVersion) Some(f) else None
+    def whenGreaterOrEqualThen[A](f : => A) : Option[A] = withOpThan(this >= CurrentVersion)(f)
 
-    def <=[A](f : => A) : Option[A] = if (this <= currentVersion) Some(f) else None
+    def whenGreaterThen[A](f : => A) : Option[A] = withOpThan(this > CurrentVersion)(f)
 
-    def <[A](f : => A) : Option[A] = if (this < currentVersion) Some(f) else None
+    def whenLessOrEqualThen[A](f : => A) : Option[A] = withOpThan(this <= CurrentVersion)(f)
 
-    def !=[A](f : => A) : Option[A] = if (this != currentVersion) Some(f) else None
+    def whenLessThen[A](f : => A) : Option[A] = withOpThan(this < CurrentVersion)(f)
+
+    def whenNotEqualThen[A](f : => A) : Option[A] = withOpThan(this != CurrentVersion)(f)
 
   }
 
@@ -75,7 +78,7 @@ object DeviceVersion {
   import Build.VERSION._
   import Build.VERSION_CODES._
 
-  case object currentVersion extends Version(SDK_INT)
+  case object CurrentVersion extends Version(SDK_INT)
 
   case object Lollipop extends Version(LOLLIPOP)
 
@@ -83,14 +86,14 @@ object DeviceVersion {
 
   case object KitKat extends Version(KITKAT)
 
-  case object JellyBeanMR2 extends Version(Build.VERSION_CODES.JELLY_BEAN_MR2)
+  case object JellyBeanMR2 extends Version(JELLY_BEAN_MR2)
 
-  case object JellyBeanMR1 extends Version(Build.VERSION_CODES.JELLY_BEAN_MR1)
+  case object JellyBeanMR1 extends Version(JELLY_BEAN_MR1)
 
-  case object JellyBean extends Version(Build.VERSION_CODES.JELLY_BEAN)
+  case object JellyBean extends Version(JELLY_BEAN)
 
-  case object IceCreamSandwichMR1 extends Version(Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1)
+  case object IceCreamSandwichMR1 extends Version(ICE_CREAM_SANDWICH_MR1)
 
-  case object IceCreamSandwich extends Version(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+  case object IceCreamSandwich extends Version(ICE_CREAM_SANDWICH)
 
 }
