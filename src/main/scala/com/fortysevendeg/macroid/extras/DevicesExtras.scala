@@ -20,6 +20,7 @@ import android.os.Build
 import macroid.AppContext
 import macroid.FullDsl._
 import scala.language.postfixOps
+import scala.reflect.ClassTag
 
 object DeviceMediaQueries {
 
@@ -33,11 +34,66 @@ object DeviceMediaQueries {
 
 object DeviceVersion {
 
-  val sdkVersion: Int = Build.VERSION.SDK_INT
+  sealed trait SDKVersion {
+    def version: Int
 
-  def versionLowerTo(version: Int): Boolean = sdkVersion < version
+    def ==(a: SDKVersion) = this.version == a.version
 
-  def versionUpperOrEqualTo(version: Int): Boolean = sdkVersion >= version
+    def >=(a: SDKVersion) = this.version >= a.version
+
+    def >(a: SDKVersion) = this.version > a.version
+
+    def <=(a: SDKVersion) = this.version <= a.version
+
+    def <(a: SDKVersion) = this.version < a.version
+
+    def !=(a: SDKVersion) = this.version != a.version
+
+    def withOpThan[A](op: => Boolean)(f : => A) : Option[A] = if (op) Some(f) else None
+
+    def whenEqualThan[A](f : => A) : Option[A] = withOpThan(this == CurrentVersion)(f)
+
+    def whenGreaterOrEqualThen[A](f : => A) : Option[A] = withOpThan(this >= CurrentVersion)(f)
+
+    def whenGreaterThen[A](f : => A) : Option[A] = withOpThan(this > CurrentVersion)(f)
+
+    def whenLessOrEqualThen[A](f : => A) : Option[A] = withOpThan(this <= CurrentVersion)(f)
+
+    def whenLessThen[A](f : => A) : Option[A] = withOpThan(this < CurrentVersion)(f)
+
+    def whenNotEqualThen[A](f : => A) : Option[A] = withOpThan(this != CurrentVersion)(f)
+
+  }
+
+  object SDKVersion {
+
+    def unapply(c: SDKVersion): Int = c.version
+
+  }
+
+  class Version(v: Int) extends SDKVersion {
+    override def version: Int = v
+  }
+
+  import Build.VERSION._
+  import Build.VERSION_CODES._
+
+  case object CurrentVersion extends Version(SDK_INT)
+
+  case object Lollipop extends Version(LOLLIPOP)
+
+  case object KitKatWatch extends Version(KITKAT_WATCH)
+
+  case object KitKat extends Version(KITKAT)
+
+  case object JellyBeanMR2 extends Version(JELLY_BEAN_MR2)
+
+  case object JellyBeanMR1 extends Version(JELLY_BEAN_MR1)
+
+  case object JellyBean extends Version(JELLY_BEAN)
+
+  case object IceCreamSandwichMR1 extends Version(ICE_CREAM_SANDWICH_MR1)
+
+  case object IceCreamSandwich extends Version(ICE_CREAM_SANDWICH)
 
 }
-

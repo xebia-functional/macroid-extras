@@ -82,8 +82,8 @@ object ActionsExtras {
 
 object ResourcesExtras {
 
-  private def resGetResource[A, B](resource: String, resourceType: String)(f: (AppContext, Int) ⇒ B)
-      (implicit c: AppContext): Option[B] = {
+  private def resGetResource[A](resource: String, resourceType: String)(f: (AppContext, Int) ⇒ A)
+      (implicit c: AppContext): Option[A] = {
     val resourceId = c.get.getResources.getIdentifier(resource, resourceType, c.get.getPackageName)
 
     resourceId match {
