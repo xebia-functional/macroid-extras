@@ -53,11 +53,11 @@ object DeviceVersion {
 
     def ifEqualThen[A](f : => A) : Option[A] = withOpThan(this == CurrentVersion)(f)
 
-    def isNotEqualThen[A](f : => A) : Option[A] = withOpThan(this != CurrentVersion)(f)
+    def ifNotEqualThen[A](f : => A) : Option[A] = withOpThan(this != CurrentVersion)(f)
 
-    def isSupportedThen[A](f : => A) : Option[A] = withOpThan(this <= CurrentVersion)(f)
+    def ifSupportedThen[A](f : => A) : Option[A] = withOpThan(this <= CurrentVersion)(f)
 
-    def isNotSupportedThen[A](f : => A) : Option[A] = withOpThan(this > CurrentVersion)(f)
+    def ifNotSupportedThen[A](f : => A) : Option[A] = withOpThan(this > CurrentVersion)(f)
 
   }
 
