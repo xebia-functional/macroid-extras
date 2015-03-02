@@ -115,6 +115,26 @@ object ViewTweaks {
   val vInvisible: Tweak[View] = Tweak[View](_.setVisibility(View.INVISIBLE))
 
   def vScrollBarStyle(style: Int): Tweak[W] = Tweak[W](_.setScrollBarStyle(style))
+
+  def vAlpha(alpha: Float): Tweak[View] = Tweak[View](_.setAlpha(alpha))
+
+  def vX(x: Float): Tweak[View] = Tweak[View](_.setX(x))
+
+  def vY(y: Float): Tweak[View] = Tweak[View](_.setY(y))
+
+  def vPivotX(x: Float): Tweak[View] = Tweak[View](_.setPivotX(x))
+
+  def vPivotY(y: Float): Tweak[View] = Tweak[View](_.setPivotY(y))
+
+  def vScaleX(x: Float): Tweak[View] = Tweak[View](_.setScaleX(x))
+
+  def vScaleY(y: Float): Tweak[View] = Tweak[View](_.setScaleY(y))
+
+  def vTranslationX(x: Float): Tweak[View] = Tweak[View](_.setTranslationX(x))
+
+  def vTranslationY(y: Float): Tweak[View] = Tweak[View](_.setTranslationY(y))
+
+  def vTranslationZ(z: Float): Tweak[View] = Tweak[View](_.setTranslationZ(z))
   
   def vBackgroundTransition(durationMilis: Int, reverse: Boolean = false): Tweak[W] = Tweak[W] {
     view ⇒
@@ -241,6 +261,17 @@ object LinearLayoutTweaks {
       param.gravity = gravity
       view.setLayoutParams(param)
   }
+
+  def llLayoutMargin(
+      marginLeft: Int = 0,
+      marginTop: Int = 0,
+      marginRight: Int = 0,
+      marginBottom: Int = 0): Tweak[W] = Tweak[W] {
+    view ⇒
+      val params = new LinearLayout.LayoutParams(view.getLayoutParams)
+      params.setMargins(marginLeft, marginTop, marginRight, marginBottom)
+      view.setLayoutParams(params)
+  }
 }
 
 object FrameLayoutTweaks {
@@ -261,6 +292,17 @@ object FrameLayoutTweaks {
   def flForeground(drawable: Drawable): Tweak[W] = Tweak[W](_.setForeground(drawable))
 
   def flForegroundGravity(foregroundGravity: Int): Tweak[W] = Tweak[W](_.setForegroundGravity(foregroundGravity))
+
+  def flLayoutMargin(
+      marginLeft: Int = 0,
+      marginTop: Int = 0,
+      marginRight: Int = 0,
+      marginBottom: Int = 0): Tweak[W] = Tweak[W] {
+    view ⇒
+      val params = new FrameLayout.LayoutParams(view.getLayoutParams)
+      params.setMargins(marginLeft, marginTop, marginRight, marginBottom)
+      view.setLayoutParams(params)
+  }
 }
 
 object TableLayoutTweaks {
@@ -315,6 +357,12 @@ object CardViewTweaks {
   type W = CardView
 
   def cvRadius(radius: Float): Tweak[W] = Tweak[W](_.setRadius(radius))
+
+  def cvElevations(elevation: Float): Tweak[W] = Tweak[W](_.setCardElevation(elevation))
+
+  def cvMaxElevations(elevation: Float): Tweak[W] = Tweak[W](_.setMaxCardElevation(elevation))
+
+  def cvPreventCornerOverlap(preventCornerOverlap: Boolean): Tweak[W] = Tweak[W](_.setPreventCornerOverlap(preventCornerOverlap))
 }
 
 object TextTweaks {
@@ -348,6 +396,9 @@ object TextTweaks {
   val tvBoldItalicCondensed: Tweak[W] = Tweak[W](x ⇒ x.setTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD_ITALIC)))
 
   def tvSize(points: Int): Tweak[W] = Tweak[W](_.setTextSize(TypedValue.COMPLEX_UNIT_SP, points))
+
+  def tvSizeResource(res: Int)(implicit appContext: AppContext): Tweak[W] =
+    Tweak[W](_.setTextSize(TypedValue.COMPLEX_UNIT_PX, appContext.get.getResources.getDimension(res)))
 
   def tvLines(lines: Int): Tweak[W] = Tweak[W](_.setLines(lines))
 
