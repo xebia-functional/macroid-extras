@@ -62,14 +62,38 @@ object RevealSnails {
       animPromise.future
   }
 
-  def move(v: Option[View]): Snail[View] = Snail[View] {
+}
+
+object MoveSnails {
+
+  def move(maybeToView: Option[View]): Snail[View] = Snail[View] {
     view ⇒
       val animPromise = Promise[Unit]()
 
-      v foreach {
+      maybeToView map {
         toView ⇒
-          val finalX: Int = (toView.getX + (toView.getWidth / 2) - (view.getWidth / 2) - view.getX).asInstanceOf[Int]
-          val finalY: Int = (toView.getY + (toView.getHeight / 2) - (view.getHeight / 2) - view.getY).asInstanceOf[Int]
+          val finalX: Int = (toView.getX + (toView.getWidth / 2) - ((view.getWidth / 2) + view.getX)).toInt
+          val finalY: Int = (toView.getY + (toView.getHeight / 2) - ((view.getHeight / 2) + view.getY)).toInt
+
+          view.animate.translationX(finalX).translationY(finalY).setListener(new AnimatorListenerAdapter {
+            override def onAnimationEnd(animation: Animator) {
+              super.onAnimationEnd(animation)
+              animPromise.complete(Success(()))
+            }
+          }).start()
+
+      }
+      animPromise.future
+  }
+
+  def moveBy(maybeToView: Option[View]): Snail[View] = Snail[View] {
+    view ⇒
+      val animPromise = Promise[Unit]()
+
+      maybeToView map {
+        toView ⇒
+          val finalX: Int = (toView.getX + (toView.getWidth / 2) - ((view.getWidth / 2) + view.getX)).toInt
+          val finalY: Int = (toView.getY + (toView.getHeight / 2) - ((view.getHeight / 2) + view.getY)).toInt
 
           view.animate.translationXBy(finalX).translationYBy(finalY).setListener(new AnimatorListenerAdapter {
             override def onAnimationEnd(animation: Animator) {
