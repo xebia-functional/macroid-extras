@@ -18,11 +18,11 @@ Usage
 resolvers ++= Seq(
     ...
     Resolver.mavenLocal,
-    "47deg Public" at "http://clinker.47deg.com/nexus/content/groups/public"
+    "jcenter" at "http://jcenter.bintray.com"
 )
 
 libraryDependencies ++= Seq(
-  aar("com.fortysevendeg" %% "macroid-extras" % "<Version | 0.1-SNAPSHOT>")
+  aar("com.fortysevendeg" %% "macroid-extras" % "<Version | 0.2-M1>")
 
 ```
 
