@@ -31,6 +31,9 @@ resolvers ++= Seq(
   Resolver.sonatypeRepo("snapshots"),
   Resolver.defaultLocal,
   "jcenter" at "http://jcenter.bintray.com",
+  Resolver.url(
+    "bintray-sbt-plugin-releases",
+    url("http://dl.bintray.com/content/sbt/sbt-plugin-releases"))(Resolver.ivyStylePatterns),
   "47deg Public" at "http://clinker.47deg.com/nexus/content/groups/public"
 )
 
@@ -40,15 +43,11 @@ libraryDependencies ++= Seq(
   aar(androidCardView),
   aar(androidRecyclerview))
 
-publishMavenStyle := true
+publishMavenStyle := false
 
-publishTo <<= version {
-  v: String =>
-    if (v.trim.endsWith("SNAPSHOT"))
-      Some("47deg Public Snapshot Repository" at "http://clinker.47deg.com/nexus/content/repositories/snapshots")
-    else
-      Some("47deg Public Release Repository" at "http://clinker.47deg.com/nexus/content/repositories/releases")
-}
+seq(bintrayPublishSettings:_*)
+
+licenses += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0"))
 
 startYear := Some(2015)
 
