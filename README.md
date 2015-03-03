@@ -18,7 +18,7 @@ Usage
 resolvers ++= Seq(
     ...
     Resolver.mavenLocal,
-    "jcenter" at "http://jcenter.bintray.com"
+    "47Deg Bintray Repo" at "http://dl.bintray.com/47deg/maven/"
 )
 
 libraryDependencies ++= Seq(
