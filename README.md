@@ -18,18 +18,18 @@ Usage
 resolvers ++= Seq(
     ...
     Resolver.mavenLocal,
-    "47deg Public" at "http://clinker.47deg.com/nexus/content/groups/public"
+    "jcenter" at "http://jcenter.bintray.com"
 )
 
 libraryDependencies ++= Seq(
-  aar("com.fortysevendeg" %% "macroid-extras" % "<Version | 0.1-SNAPSHOT>")
+  aar("com.fortysevendeg" %% "macroid-extras" % "<Version | 0.2-M1>")
 
 ```
 
 License
 ======
 
-Copyright (C) 2012 47 Degrees, LLC http://47deg.com hello@47deg.com
+Copyright (C) 2015 47 Degrees, LLC http://47deg.com hello@47deg.com
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 
