@@ -26,7 +26,6 @@ import android.text.TextUtils.TruncateAt
 import android.text.{Spanned, Spannable}
 import android.util.TypedValue
 import android.view.ViewGroup.LayoutParams._
-import android.view.ViewGroup.MarginLayoutParams
 import android.view.{ViewOutlineProvider, View, ViewGroup}
 import android.webkit.{WebViewClient, WebView}
 import android.widget.ImageView.ScaleType
@@ -55,11 +54,12 @@ object ViewTweaks {
   def vMinWidth(width: Int): Tweak[W] = Tweak[W](_.setMinimumWidth(width))
 
   def vMargins(margin: Int): Tweak[W] = Tweak[W] {
-    _.getLayoutParams match {
-      case lp: MarginLayoutParams ⇒
-        lp.setMargins(margin, margin, margin, margin)
-      case _ ⇒
-    }
+    view ⇒
+      view
+        .getLayoutParams
+        .asInstanceOf[ViewGroup.MarginLayoutParams]
+        .setMargins(margin, margin, margin, margin)
+      view.requestLayout()
   }
 
   def vMargin(
@@ -135,11 +135,11 @@ object ViewTweaks {
   def vTranslationY(y: Float): Tweak[View] = Tweak[View](_.setTranslationY(y))
 
   def vTranslationZ(z: Float): Tweak[View] = Tweak[View](_.setTranslationZ(z))
-  
-  def vBackgroundTransition(durationMilis: Int, reverse: Boolean = false): Tweak[W] = Tweak[W] {
+
+  def vBackgroundTransition(durationMillis: Int, reverse: Boolean = false): Tweak[W] = Tweak[W] {
     view ⇒
       val transitionBackground = view.getBackground.asInstanceOf[TransitionDrawable]
-      if (reverse) transitionBackground.reverseTransition(durationMilis) else transitionBackground.startTransition(durationMilis)
+      if (reverse) transitionBackground.reverseTransition(durationMillis) else transitionBackground.startTransition(durationMillis)
   }
 
   val vCircleOutlineProvider: Tweak[W] = Tweak[W] {
@@ -257,7 +257,7 @@ object LinearLayoutTweaks {
 
   def llLayoutGravity(gravity: Int): Tweak[View] = Tweak[View] {
     view ⇒
-      val param = new LinearLayout.LayoutParams(view.getLayoutParams.width, view.getLayoutParams.height)
+      val param = new LinearLayout.LayoutParams(view.getLayoutParams)
       param.gravity = gravity
       view.setLayoutParams(param)
   }
@@ -266,7 +266,7 @@ object LinearLayoutTweaks {
       marginLeft: Int = 0,
       marginTop: Int = 0,
       marginRight: Int = 0,
-      marginBottom: Int = 0): Tweak[W] = Tweak[W] {
+      marginBottom: Int = 0): Tweak[View] = Tweak[View] {
     view ⇒
       val params = new LinearLayout.LayoutParams(view.getLayoutParams)
       params.setMargins(marginLeft, marginTop, marginRight, marginBottom)
@@ -284,7 +284,7 @@ object FrameLayoutTweaks {
   val flMatchWeightHorizontal: Tweak[View] = lp[W](0, MATCH_PARENT, 1)
 
   def flLayoutGravity(gravity: Int): Tweak[View] = Tweak[View] { view ⇒
-    val param = new FrameLayout.LayoutParams(view.getLayoutParams.width, view.getLayoutParams.height)
+    val param = new FrameLayout.LayoutParams(view.getLayoutParams)
     param.gravity = gravity
     view.setLayoutParams(param)
   }
@@ -297,7 +297,7 @@ object FrameLayoutTweaks {
       marginLeft: Int = 0,
       marginTop: Int = 0,
       marginRight: Int = 0,
-      marginBottom: Int = 0): Tweak[W] = Tweak[W] {
+      marginBottom: Int = 0): Tweak[View] = Tweak[View] {
     view ⇒
       val params = new FrameLayout.LayoutParams(view.getLayoutParams)
       params.setMargins(marginLeft, marginTop, marginRight, marginBottom)
@@ -310,7 +310,7 @@ object TableLayoutTweaks {
 
   def tlLayoutMargins(value: Int): Tweak[View] = Tweak[View] {
     view ⇒
-      val param = new TableLayout.LayoutParams(view.getLayoutParams.width, view.getLayoutParams.height)
+      val param = new TableLayout.LayoutParams(view.getLayoutParams)
       param.setMargins(value, value, value, value)
       view.setLayoutParams(param)
   }
@@ -330,7 +330,7 @@ object TableRowTweaks {
 
   def trLayoutMargins(value: Int): Tweak[View] = Tweak[View] {
     view ⇒
-      val param = new TableRow.LayoutParams(view.getLayoutParams.width, view.getLayoutParams.height)
+      val param = new TableRow.LayoutParams(view.getLayoutParams)
       param.setMargins(value, value, value, value)
       view.setLayoutParams(param)
   }

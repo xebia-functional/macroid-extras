@@ -19,6 +19,7 @@ package com.fortysevendeg.macroid.extras
 import android.app.Activity
 import android.content.{ComponentName, Intent}
 import android.graphics.drawable.Drawable
+import android.view.ContextThemeWrapper
 import android.widget.Toast
 import macroid.{AppContext, ActivityContext, Ui}
 
@@ -77,6 +78,27 @@ object ActionsExtras {
 
   def aLongToast(msg: String)(implicit c: AppContext): Unit =
     Toast.makeText(c.get, msg, Toast.LENGTH_LONG).show()
+
+}
+
+object ThemeExtras {
+
+  def themeGetDrawable(themeId: Int, attr: Int)(implicit activityContext: ActivityContext): Drawable = {
+    val contextTheme = new ContextThemeWrapper(activityContext.get, themeId)
+    val a = contextTheme.getTheme.obtainStyledAttributes(Array(attr))
+    val attributeResourceId = a.getResourceId(0, 0)
+    val drawable = contextTheme.getResources.getDrawable(attributeResourceId)
+    a.recycle()
+    drawable
+  }
+
+  def themeGetDrawable(attr: Int)(implicit activityContext: ActivityContext): Drawable = {
+    val a = activityContext.get.getTheme.obtainStyledAttributes(Array(attr))
+    val attributeResourceId = a.getResourceId(0, 0)
+    val drawable = activityContext.get.getResources.getDrawable(attributeResourceId)
+    a.recycle()
+    drawable
+  }
 
 }
 
