@@ -22,7 +22,7 @@ resolvers ++= Seq(
 )
 
 libraryDependencies ++= Seq(
-  aar("com.fortysevendeg" %% "macroid-extras" % "<Version | 0.2-M1>")
+  aar("com.fortysevendeg" %% "macroid-extras" % "<Version | 0.1>")
 
 ```
 

@@ -22,10 +22,7 @@ resolvers ++= Seq(
   Resolver.sonatypeRepo("releases"),
   Resolver.sonatypeRepo("snapshots"),
   Resolver.defaultLocal,
-  "jcenter" at "http://jcenter.bintray.com",
-  Resolver.url(
-    "bintray-sbt-plugin-releases",
-    url("http://dl.bintray.com/content/sbt/sbt-plugin-releases"))(Resolver.ivyStylePatterns)
+  "jcenter" at "http://jcenter.bintray.com"
 )
 
 libraryDependencies ++= Seq(

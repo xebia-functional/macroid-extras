@@ -6,10 +6,6 @@ organizationHomepage := Some(new URL("http://47deg.com"))
 
 publishMavenStyle := true
 
-seq(bintrayPublishSettings:_*)
-
-bintray.Keys.bintrayOrganization in bintray.Keys.bintray := Some("47deg")
-
 startYear := Some(2015)
 
 description := "47 Degrees Macroid Extras"
