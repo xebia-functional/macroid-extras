@@ -1,6 +1,6 @@
 object Versions {
 
-  val appV = "0.2-SNAPSHOT"
+  val appV = "0.1"
   val scalaV = "2.11.4"
   val androidPlatformV = "android-21"
   val androidV = "21.0.0"
