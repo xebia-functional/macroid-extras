@@ -31,6 +31,7 @@ import android.webkit.{WebViewClient, WebView}
 import android.widget.ImageView.ScaleType
 import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget._
+import DeviceVersion._
 import macroid.FullDsl._
 import macroid.{AppContext, Tweak}
 
@@ -96,9 +97,15 @@ object ViewTweaks {
   def vBackgroundColorResource(color: Int)(implicit appContext: AppContext): Tweak[W] =
     Tweak[W](_.setBackgroundColor(appContext.get.getResources.getColor(color)))
 
-  def vBackground(drawable: Drawable): Tweak[W] = Tweak[W](_.setBackground(drawable))
+  def vBackground(drawable: Drawable): Tweak[W] = Tweak[W](
+    view =>
+      JellyBean ifSupportedThen view.setBackground(drawable) getOrElse view.setBackgroundDrawable(drawable)
+  )
 
-  val vBlankBackground = Tweak[W](_.setBackground(null))
+  val vBlankBackground = Tweak[W](
+    view =>
+      JellyBean ifSupportedThen view.setBackground(null) getOrElse view.setBackgroundDrawable(null)
+  )
 
   def vTag(tag: String): Tweak[W] = Tweak[W](_.setTag(tag))
 
