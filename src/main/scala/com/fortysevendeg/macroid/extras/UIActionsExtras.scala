@@ -139,6 +139,9 @@ object ResourcesExtras {
   def resGetDrawable(resource: String)(implicit c: AppContext): Option[Drawable] =
     resGetResource(resource, "drawable")((c, resourceId) ⇒ c.get.getResources.getDrawable(resourceId))
 
+  def resGetDrawableIdentifier(resource: String)(implicit c: AppContext): Option[Int] =
+    resGetResource(resource, "drawable")((c, resourceId) ⇒ resourceId)
+
   def resGetIdentifier(resource: String, resourceType: String)(implicit c: AppContext): Option[Int] = {
     resGetResource(resource, resourceType)((_, resourceId) ⇒ resourceId)
   }
