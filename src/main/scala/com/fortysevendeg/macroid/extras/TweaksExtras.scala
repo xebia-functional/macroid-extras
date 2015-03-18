@@ -26,6 +26,7 @@ import android.text.TextUtils.TruncateAt
 import android.text.{Spanned, Spannable}
 import android.util.TypedValue
 import android.view.ViewGroup.LayoutParams._
+import android.view.animation.Animation
 import android.view.{ViewOutlineProvider, View, ViewGroup}
 import android.webkit.{WebViewClient, WebView}
 import android.widget.ImageView.ScaleType
@@ -167,6 +168,14 @@ object ViewTweaks {
 
   def vElevation(elevation: Float): Tweak[W] = Tweak[W] (_.setElevation(elevation))
 
+  val vBringToFront: Tweak[W] = Tweak[W] (_.bringToFront())
+
+  val vClearAnimation: Tweak[W] = Tweak[W] (_.clearAnimation())
+
+  def vAnimation(animation: Animation): Tweak[W] = Tweak[W] (_.setAnimation(animation))
+
+  def vStartAnimation(animation: Animation): Tweak[W] = Tweak[W] (_.startAnimation(animation))
+
 }
 
 object ViewCompatTweaks {
@@ -181,9 +190,16 @@ object ViewGroupTweaks {
 
   def vgAddView[V <: View](view: V): Tweak[W] = Tweak[W](_.addView(view))
 
+  def vgAddView[V <: View](view: V, params: ViewGroup.LayoutParams): Tweak[W] = Tweak[W](_.addView(view, params))
+
   def vgAddViews[V <: View](views: Seq[V]): Tweak[W] = Tweak[W] {
     rootView =>
       views map (rootView.addView(_))
+  }
+
+  def vgAddViews[V <: View](views: Seq[V], params: ViewGroup.LayoutParams): Tweak[W] = Tweak[W] {
+    rootView =>
+      views map (rootView.addView(_, params))
   }
 
   val vgRemoveAllViews: Tweak[W] = Tweak[W](_.removeAllViews())
