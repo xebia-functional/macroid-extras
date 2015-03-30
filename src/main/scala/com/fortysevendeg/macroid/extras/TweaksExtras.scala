@@ -320,8 +320,8 @@ object GridLayoutTweaks {
     bottom: Int = GridLayout.UNDEFINED): Tweak[W] = Tweak[W] {
     rootView ⇒
       for {
-        row <- 0 to (rows - 1)
-        column <- 0 to (columns - 1)
+        row <- 0 until rows
+        column <- 0 until columns
       } yield {
         views.lift((row * rows) + column) map {
           view ⇒
