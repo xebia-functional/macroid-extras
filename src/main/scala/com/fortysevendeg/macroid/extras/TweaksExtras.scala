@@ -21,13 +21,15 @@ import android.graphics.PorterDuff.Mode
 import android.graphics.drawable.{TransitionDrawable, Drawable}
 import android.graphics._
 import android.net.Uri
-import android.support.v4.view.ViewCompat
+import android.support.v4.view.ViewPager.OnPageChangeListener
+import android.support.v4.view.{PagerAdapter, ViewPager, ViewCompat}
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.widget.{CardView, RecyclerView, Toolbar}
 import android.text.TextUtils.TruncateAt
 import android.text.{Spanned, Spannable}
 import android.util.TypedValue
 import android.view.ViewGroup.LayoutParams._
+import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.view.animation.Animation
 import android.view.{ViewOutlineProvider, View, ViewGroup}
 import android.webkit.{WebViewClient, WebView}
@@ -37,7 +39,7 @@ import android.widget._
 import DeviceVersion._
 import com.fortysevendeg.macroid.extras.ResourcesExtras._
 import macroid.FullDsl._
-import macroid.{AppContext, Tweak}
+import macroid.{Ui, AppContext, Tweak}
 
 object ViewTweaks {
   type W = View
@@ -203,6 +205,18 @@ object ViewTweaks {
 
   def vLayerTypeNone(paint: Paint = null): Tweak[W] = Tweak[W] (_.setLayerType(View.LAYER_TYPE_NONE, paint))
 
+  def vGlobalLayoutListener(globalLayoutListener: View => Ui[_]): Tweak[W] = Tweak[W] {
+    view =>
+      view.getViewTreeObserver.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+        override def onGlobalLayout(): Unit = {
+          JellyBean ifSupportedThen
+            view.getViewTreeObserver.removeOnGlobalLayoutListener(this) getOrElse
+            view.getViewTreeObserver.removeGlobalOnLayoutListener(this)
+          runUi(globalLayoutListener(view))
+        }
+      })
+  }
+
 }
 
 object ViewCompatTweaks {
@@ -275,6 +289,29 @@ object ImageViewTweaks {
 
   def ivColorFilter(color: Int, mode: Mode = Mode.MULTIPLY): Tweak[W] =
     Tweak[W](_.setColorFilter(new PorterDuffColorFilter(color, mode)))
+
+}
+
+object ViewPagerTweaks {
+  type W = ViewPager
+
+  def vpAdapter(adapter: PagerAdapter): Tweak[W] = Tweak[W](_.setAdapter(adapter))
+
+  def vpOnPageChangeListener(listener: OnPageChangeListener): Tweak[W] = Tweak[W](_.setOnPageChangeListener(listener))
+
+  def vpCurrentItem(currentItem: Int): Tweak[W] = Tweak[W](_.setCurrentItem(currentItem))
+
+  def vpCurrentItem(currentItem: Int, smoothScroll: Boolean): Tweak[W] =
+    Tweak[W](_.setCurrentItem(currentItem, smoothScroll))
+
+  def vpPageTransformer(reverseDrawingOrder: Boolean, transformer: ViewPager.PageTransformer ): Tweak[W] =
+    Tweak[W](_.setPageTransformer(reverseDrawingOrder, transformer))
+
+  def vpOffscreenPageLimit(limit: Int): Tweak[W] = Tweak[W](_.setOffscreenPageLimit(limit))
+
+  def vpPageMargin(marginPixels: Int): Tweak[W] = Tweak[W](_.setPageMargin(marginPixels))
+
+  def vpPageMarginDrawable(resId: Int): Tweak[W] = Tweak[W](_.setPageMarginDrawable(resId))
 
 }
 
@@ -468,6 +505,24 @@ object CardViewTweaks {
   def cvMaxElevations(elevation: Float): Tweak[W] = Tweak[W](_.setMaxCardElevation(elevation))
 
   def cvPreventCornerOverlap(preventCornerOverlap: Boolean): Tweak[W] = Tweak[W](_.setPreventCornerOverlap(preventCornerOverlap))
+
+  def cvCardBackgroundColor(color: Int): Tweak[W] = Tweak[W](_.setCardBackgroundColor(color))
+
+  def cvCardBackgroundColorResource(resColor: Int)(implicit appContext: AppContext): Tweak[W] =
+    Tweak[W](_.setCardBackgroundColor(resGetColor(resColor)))
+
+  def cvShadowPadding(left: Int, top: Int, right: Int, bottom: Int): Tweak[W] =
+    Tweak[W](_.setShadowPadding(left, top, right, bottom))
+
+  def cvPadding(left: Int, top: Int, right: Int, bottom: Int): Tweak[W] =
+    Tweak[W](_.setPadding(left, top, right, bottom))
+
+  def cvContentPadding(left: Int, top: Int, right: Int, bottom: Int): Tweak[W] =
+    Tweak[W](_.setContentPadding(left, top, right, bottom))
+
+  def cvPaddingRelative(start: Int, top: Int, right: Int, bottom: Int): Tweak[W] =
+    Tweak[W](_.setPaddingRelative(start, top, right, bottom))
+
 }
 
 object TextTweaks {
