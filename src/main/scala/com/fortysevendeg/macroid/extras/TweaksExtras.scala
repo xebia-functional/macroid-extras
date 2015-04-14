@@ -217,6 +217,18 @@ object ViewTweaks {
       })
   }
 
+  def vOverScrollMode(mode: Int): Tweak[W] = Tweak[W] (_.setOverScrollMode(mode))
+
+  def vScrollBy(x: Int, y: Int) = Tweak[View](_.scrollBy(x, y))
+
+  def vScrollTo(x: Int, y: Int) = Tweak[View](_.scrollTo(x, y))
+
+  val vComputeScroll = Tweak[View](_.computeScroll())
+
+  def vScrollX(x: Int) = Tweak[View](_.setScrollX(x))
+
+  def vScrollY(y: Int) = Tweak[View](_.setScrollY(y))
+
 }
 
 object ViewCompatTweaks {
