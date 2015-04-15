@@ -19,9 +19,11 @@ package com.fortysevendeg.macroid.extras
 import android.app.Activity
 import android.content.{ComponentName, Intent}
 import android.graphics.drawable.Drawable
+import android.os.Handler
 import android.view.ContextThemeWrapper
 import android.widget.Toast
 import macroid.{AppContext, ActivityContext, Ui}
+import macroid.FullDsl._
 
 object UIActionsExtras {
 
@@ -42,6 +44,20 @@ object UIActionsExtras {
 
   def uiLongToast(msg: String)(implicit c: AppContext): Ui[Unit] =
     Ui(Toast.makeText(c.get, msg, Toast.LENGTH_LONG).show())
+
+  def uiHandler(f: => Ui[_]): Ui[Unit] =
+    Ui {
+      new Handler().post(new Runnable {
+        override def run(): Unit = runUi(f)
+      })
+    }
+
+  def uiHandlerDelayed(f: => Ui[_], delayMilis: Int): Ui[Unit] =
+    Ui {
+      new Handler().postDelayed(new Runnable {
+        override def run(): Unit = runUi(f)
+      }, delayMilis)
+    }
 
 }
 
