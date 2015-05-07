@@ -16,10 +16,10 @@
 
 package com.fortysevendeg.macroid.extras
 
-import macroid.AppContext
+import macroid.ContextWrapper
 
-trait AppContextProvider {
+trait ContextWrapperProvider {
 
-  implicit val appContextProvider : AppContext
+  implicit val contextProvider : ContextWrapper
 
 }

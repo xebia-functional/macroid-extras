@@ -17,18 +17,17 @@
 package com.fortysevendeg.macroid.extras
 
 import android.os.Build
-import macroid.AppContext
+import macroid.ContextWrapper
 import macroid.FullDsl._
 import scala.language.postfixOps
-import scala.reflect.ClassTag
 
 object DeviceMediaQueries {
 
-  def tablet(implicit ctx: AppContext) = widerThan(720 dp)
+  def tablet(implicit ctx: ContextWrapper) = widerThan(720 dp)
 
-  def landscapeTablet(implicit ctx: AppContext) = widerThan(720 dp) & landscape
+  def landscapeTablet(implicit ctx: ContextWrapper) = widerThan(720 dp) & landscape
 
-  def portraitTablet(implicit ctx: AppContext) = widerThan(720 dp) & portrait
+  def portraitTablet(implicit ctx: ContextWrapper) = widerThan(720 dp) & portrait
 
 }
 

@@ -17,7 +17,7 @@
 package com.fortysevendeg.macroid.extras
 
 import android.view.{LayoutInflater, ViewGroup}
-import macroid.AppContext
+import macroid.ContextWrapper
 
 object LayoutBuildingExtra {
 
@@ -25,6 +25,6 @@ object LayoutBuildingExtra {
 
 }
 
-class RootView(layout: Int)(implicit appContext: AppContext) {
-  val view = LayoutInflater.from(appContext.get).inflate(layout, null).asInstanceOf[ViewGroup]
+class RootView(layout: Int)(implicit context: ContextWrapper) {
+  val view = LayoutInflater.from(context.application).inflate(layout, null).asInstanceOf[ViewGroup]
 }
