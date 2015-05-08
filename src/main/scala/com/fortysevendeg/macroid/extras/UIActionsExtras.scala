@@ -69,7 +69,10 @@ object UIActionsExtras {
 object ActionsExtras {
 
   def aStartActivity[T <: Activity]()(implicit c: ActivityContextWrapper, m: Manifest[T]): Unit =
-    c.application.startActivity(new Intent(c.application, m.runtimeClass))
+    c.original.get map {
+      activity =>
+        activity.startActivity(new Intent(c.application, m.runtimeClass))
+    }
 
   def aStartActivityForResult[T <: Activity](result: Int)(implicit c: ActivityContextWrapper, m: Manifest[T]): Unit =
     c.original.get map {
@@ -81,7 +84,10 @@ object ActionsExtras {
       (implicit c: ActivityContextWrapper): Unit = {
     val intent = new Intent()
     intent.setComponent(componentName)
-    c.application.startActivity(intent)
+    c.original.get map {
+      activity =>
+        activity.startActivity(intent)
+    }
   }
 
   def aStartActivityFromComponentNameForResult[T <: Activity](componentName: ComponentName, result: Int)
