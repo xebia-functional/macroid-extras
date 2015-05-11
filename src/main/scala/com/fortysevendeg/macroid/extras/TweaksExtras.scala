@@ -39,7 +39,7 @@ import android.widget._
 import DeviceVersion._
 import com.fortysevendeg.macroid.extras.ResourcesExtras._
 import macroid.FullDsl._
-import macroid.{Ui, AppContext, Tweak}
+import macroid.{Ui, ContextWrapper, Tweak}
 
 object ViewTweaks {
   type W = View
@@ -100,8 +100,8 @@ object ViewTweaks {
 
   def vBackgroundColor(color: Int): Tweak[W] = Tweak[W](_.setBackgroundColor(color))
 
-  def vBackgroundColorResource(color: Int)(implicit appContext: AppContext): Tweak[W] =
-    Tweak[W](_.setBackgroundColor(appContext.get.getResources.getColor(color)))
+  def vBackgroundColorResource(color: Int)(implicit context: ContextWrapper): Tweak[W] =
+    Tweak[W](_.setBackgroundColor(context.application.getResources.getColor(color)))
 
   def vBackground(drawable: Drawable): Tweak[W] = Tweak[W](
     view ⇒
@@ -151,7 +151,7 @@ object ViewTweaks {
 
   def vTranslationZ(z: Float): Tweak[View] = Tweak[View](_.setTranslationZ(z))
 
-  def vBackgroundColorFilterResource(res: Int, mode: Mode = Mode.MULTIPLY)(implicit appContext: AppContext): Tweak[W] =
+  def vBackgroundColorFilterResource(res: Int, mode: Mode = Mode.MULTIPLY)(implicit context: ContextWrapper): Tweak[W] =
     Tweak[W](_.getBackground.setColorFilter(new PorterDuffColorFilter(resGetColor(res), mode)))
 
   def vBackgroundColorFilter(color: Int, mode: Mode = Mode.MULTIPLY): Tweak[W] =
@@ -194,8 +194,8 @@ object ViewTweaks {
 
   def vStartAnimation(animation: Animation): Tweak[W] = Tweak[W] (_.startAnimation(animation))
 
-  def vStateListAnimator(animation: Int)(implicit appContext: AppContext): Tweak[W] =
-    Tweak[W] (_.setStateListAnimator(AnimatorInflater.loadStateListAnimator(appContext.get, animation)))
+  def vStateListAnimator(animation: Int)(implicit context: ContextWrapper): Tweak[W] =
+    Tweak[W] (_.setStateListAnimator(AnimatorInflater.loadStateListAnimator(context.application, animation)))
 
   def vLayerType(layerType: Int, paint: Paint = null): Tweak[W] = Tweak[W] (_.setLayerType(layerType, paint))
 
@@ -296,7 +296,7 @@ object ImageViewTweaks {
 
   def ivAdjustViewBounds(adjustViewBounds: Boolean): Tweak[W] = Tweak[W](_.setAdjustViewBounds(adjustViewBounds))
 
-  def ivColorFilterResource(res: Int, mode: Mode = Mode.MULTIPLY)(implicit appContext: AppContext): Tweak[W] =
+  def ivColorFilterResource(res: Int, mode: Mode = Mode.MULTIPLY)(implicit context: ContextWrapper): Tweak[W] =
     Tweak[W](_.setColorFilter(new PorterDuffColorFilter(resGetColor(res), mode)))
 
   def ivColorFilter(color: Int, mode: Mode = Mode.MULTIPLY): Tweak[W] =
@@ -402,10 +402,10 @@ object LinearLayoutTweaks {
 
   def llGravity(gravity: Int): Tweak[W] = Tweak[W](_.setGravity(gravity))
 
-  def llDividerPadding(res: Int, padding: Int)(implicit appContext: AppContext): Tweak[W] = Tweak[W] {
+  def llDividerPadding(res: Int, padding: Int)(implicit context: ContextWrapper): Tweak[W] = Tweak[W] {
     view ⇒
       view.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE)
-      view.setDividerDrawable(appContext.get.getResources.getDrawable(res))
+      view.setDividerDrawable(context.application.getResources.getDrawable(res))
       view.setDividerPadding(padding)
   }
 
@@ -520,7 +520,7 @@ object CardViewTweaks {
 
   def cvCardBackgroundColor(color: Int): Tweak[W] = Tweak[W](_.setCardBackgroundColor(color))
 
-  def cvCardBackgroundColorResource(resColor: Int)(implicit appContext: AppContext): Tweak[W] =
+  def cvCardBackgroundColorResource(resColor: Int)(implicit context: ContextWrapper): Tweak[W] =
     Tweak[W](_.setCardBackgroundColor(resGetColor(resColor)))
 
   def cvShadowPadding(left: Int, top: Int, right: Int, bottom: Int): Tweak[W] =
@@ -542,8 +542,8 @@ object TextTweaks {
 
   def tvColor(color: Int): Tweak[W] = Tweak[W](_.setTextColor(color))
 
-  def tvColorResource(resColor: Int)(implicit appContext: AppContext): Tweak[W] =
-    Tweak[W](_.setTextColor(appContext.get.getResources.getColor(resColor)))
+  def tvColorResource(resColor: Int)(implicit context: ContextWrapper): Tweak[W] =
+    Tweak[W](_.setTextColor(context.application.getResources.getColor(resColor)))
 
   val tvBold: Tweak[W] = Tweak[W](x ⇒ x.setTypeface(x.getTypeface, Typeface.BOLD))
 
@@ -569,8 +569,8 @@ object TextTweaks {
 
   def tvSize(points: Int): Tweak[W] = Tweak[W](_.setTextSize(TypedValue.COMPLEX_UNIT_SP, points))
 
-  def tvSizeResource(res: Int)(implicit appContext: AppContext): Tweak[W] =
-    Tweak[W](_.setTextSize(TypedValue.COMPLEX_UNIT_PX, appContext.get.getResources.getDimension(res)))
+  def tvSizeResource(res: Int)(implicit context: ContextWrapper): Tweak[W] =
+    Tweak[W](_.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.application.getResources.getDimension(res)))
 
   def tvLines(lines: Int): Tweak[W] = Tweak[W](_.setLines(lines))
 
