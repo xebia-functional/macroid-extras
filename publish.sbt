@@ -47,3 +47,10 @@ credentials += Credentials("Sonatype Nexus Repository Manager",
   sys.env.getOrElse("PUBLISH_PASSWORD", ""))
 
 publishArtifact in Test := false
+
+lazy val publishSnapshot = taskKey[Unit]("Publish only if the version is a SNAPSHOT")
+
+publishSnapshot := Def.taskDyn {
+  if (isSnapshot.value) Def.task { PgpKeys.publishSigned.value }
+  else Def.task(println("Actual version is not a Snapshot. Skipping publish."))
+}.value
