@@ -1,0 +1,35 @@
+sudo: false
+language: scala
+scala:
+  - 2.11.7
+addons:
+  apt:
+    packages:
+      - libc6-i386
+      - lib32z1
+      - lib32stdc++6
+env:
+  global:
+    - secure: "fgDivXafU/+ACs1CByuUxWHfMrOXFVGGacgeuvItH/C2L1XJSCRY6OPIloDrk6I/+DcDN2Rcjb1+pv2hbmCH8PQMPk27mYNLVdSBK4NuEsEdDnpL2Z+FRutRPM+yaHdlM+nbUaLKSa/fhqpWHA6m9mrQYeQnWy4mD/UZqC/Yq7M="
+    - secure: "e6HcKx2PNgZiZXw2mCUyEbh+JmGTN8bud1g6T4dvDa7mt7NbLxfcNFSa02JUGhW+Su63cizsWTPpBaThNDPvJEP/Gxf/stTu7WmFlEESy0jZvx7BarUl+UGedmfa4NsiLhyT5qVPyaBfrHfGLGIFcDVMBH2pYdQmwMdA0eoX2ws="
+    - secure: "Q3MxHKB5HNRl5XeK7YKM5WtbjYs1D4n5nkTrBoUS39Y+XEGxnRArExDGF2xiKb07sWTexLouWKr9KB5kUBfflbl3s1/Mv4SGESMhg1cBEfSu1T/6LGcJ5+rMcmoeL33niVo0jIOUWzOsAOP/ld6ezqzOE2je5wMGIlDbESAc6yU="
+before_install:
+  - wget http://dl.google.com/android/android-sdk_r24-linux.tgz
+  - tar xf android-sdk_r24-linux.tgz
+  - export ANDROID_HOME=$PWD/android-sdk-linux
+  - export ANDROID_SDK_HOME=$PWD/android-sdk-linux
+  - export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
+  - echo yes | android update sdk --all --filter platform-tools --no-ui
+  - echo yes | android update sdk --all --filter build-tools-21.0.0 --no-ui
+  - echo yes | android update sdk --all --filter android-21 --no-ui
+  - echo yes | android update sdk --all --filter extra-android-support --no-ui
+  - echo yes | android update sdk --all --filter extra-android-m2repository --no-ui
+  - echo yes | android update sdk --all --filter extra-google-m2repository --no-ui
+  - export GPG_FOLDER=$TRAVIS_BUILD_DIR
+  - openssl aes-256-cbc -K $encrypted_43f4a47743aa_key -iv $encrypted_43f4a47743aa_iv -in $TRAVIS_BUILD_DIR/rings.tar.enc -out $TRAVIS_BUILD_DIR/rings.tar -d
+  - tar -xvf $TRAVIS_BUILD_DIR/rings.tar -C $TRAVIS_BUILD_DIR
+script:
+  - sbt ++$TRAVIS_SCALA_VERSION clean test
+after_success:
+  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && sbt ++$TRAVIS_SCALA_VERSION publishSigned
+  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && sbt ++$TRAVIS_SCALA_VERSION publishSigned
