@@ -15,14 +15,20 @@ Usage
 
 ```scala
 
-resolvers ++= Seq(
-    ...
-    Resolver.mavenLocal,
-    "jcenter" at "http://jcenter.bintray.com"
-)
+libraryDependencies ++= Seq(
+  aar("com.fortysevendeg" %% "macroid-extras" % "0.2")
+
+```
+
+If you want to use the SNAPSHOT version you need to add the Sonatype SNAPSHOT repo
+ 
+```scala
+
+resolvers += 
+  "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
 
 libraryDependencies ++= Seq(
-  aar("com.fortysevendeg" %% "macroid-extras" % "<Version | 0.1>")
+  aar("com.fortysevendeg" %% "macroid-extras" % "0.3-SNAPSHOT")
 
 ```
 
