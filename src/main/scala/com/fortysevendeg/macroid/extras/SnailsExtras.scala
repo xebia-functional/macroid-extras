@@ -34,7 +34,7 @@ object RevealSnails {
       val radius = SnailsUtils.calculateRadius(x, y, view.getWidth, view.getHeight)
       val anim: Animator = ViewAnimationUtils.createCircularReveal(view, x, y, 0, radius)
       anim.addListener(new AnimatorListenerAdapter {
-        override def onAnimationEnd(animation: Animator) {
+        override def onAnimationEnd(animation: Animator) = {
           super.onAnimationEnd(animation)
           animPromise.complete(Success(()))
         }
@@ -52,7 +52,7 @@ object RevealSnails {
       val radius = SnailsUtils.calculateRadius(x, y, view.getWidth, view.getHeight)
       val anim: Animator = ViewAnimationUtils.createCircularReveal(view, x, y, radius, 0)
       anim.addListener(new AnimatorListenerAdapter {
-        override def onAnimationEnd(animation: Animator) {
+        override def onAnimationEnd(animation: Animator) = {
           super.onAnimationEnd(animation)
           view.setVisibility(INVISIBLE)
           animPromise.complete(Success(()))
@@ -70,13 +70,13 @@ object MoveSnails {
     view ⇒
       val animPromise = Promise[Unit]()
 
-      maybeToView map {
+      maybeToView foreach  {
         toView ⇒
           val finalX: Int = (toView.getX + (toView.getWidth / 2) - ((view.getWidth / 2) + view.getX)).toInt
           val finalY: Int = (toView.getY + (toView.getHeight / 2) - ((view.getHeight / 2) + view.getY)).toInt
 
           view.animate.translationX(finalX).translationY(finalY).setListener(new AnimatorListenerAdapter {
-            override def onAnimationEnd(animation: Animator) {
+            override def onAnimationEnd(animation: Animator) = {
               super.onAnimationEnd(animation)
               animPromise.complete(Success(()))
             }
@@ -90,13 +90,13 @@ object MoveSnails {
     view ⇒
       val animPromise = Promise[Unit]()
 
-      maybeToView map {
+      maybeToView foreach {
         toView ⇒
           val finalX: Int = (toView.getX + (toView.getWidth / 2) - ((view.getWidth / 2) + view.getX)).toInt
           val finalY: Int = (toView.getY + (toView.getHeight / 2) - ((view.getHeight / 2) + view.getY)).toInt
 
           view.animate.translationXBy(finalX).translationYBy(finalY).setListener(new AnimatorListenerAdapter {
-            override def onAnimationEnd(animation: Animator) {
+            override def onAnimationEnd(animation: Animator) = {
               super.onAnimationEnd(animation)
               animPromise.complete(Success(()))
             }
