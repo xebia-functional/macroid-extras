@@ -212,7 +212,7 @@ object ViewTweaks {
           JellyBean ifSupportedThen
             view.getViewTreeObserver.removeOnGlobalLayoutListener(this) getOrElse
             view.getViewTreeObserver.removeGlobalOnLayoutListener(this)
-          runUi(globalLayoutListener(view))
+          globalLayoutListener(view).run
         }
       })
   }
@@ -247,12 +247,12 @@ object ViewGroupTweaks {
 
   def vgAddViews[V <: View](views: Seq[V]): Tweak[W] = Tweak[W] {
     rootView ⇒
-      views map (rootView.addView(_))
+      views foreach rootView.addView
   }
 
   def vgAddViews[V <: View](views: Seq[V], params: ViewGroup.LayoutParams): Tweak[W] = Tweak[W] {
     rootView ⇒
-      views map (rootView.addView(_, params))
+      views foreach (rootView.addView(_, params))
   }
 
   val vgRemoveAllViews: Tweak[W] = Tweak[W](_.removeAllViews())

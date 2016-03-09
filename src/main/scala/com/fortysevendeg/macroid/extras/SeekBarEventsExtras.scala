@@ -19,7 +19,6 @@ package com.fortysevendeg.macroid.extras
 import android.view.View
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
-import macroid.FullDsl._
 import macroid.Ui
 import scala.language.implicitConversions
 
@@ -36,15 +35,15 @@ object SeekBarEventsExtras {
 
   implicit def onSeekBarChangeListener(listener: OnSeekBarChangeListenerHandler): OnSeekBarChangeListener = {
     new OnSeekBarChangeListener {
-      override def onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean): Unit = {
-        runUi(listener.onProgressChangedHandler(seekBar, progress, fromUser))
-      }
-      override def onStopTrackingTouch(seekBar: SeekBar): Unit = {
-        runUi(listener.onStopTrackingTouchHandler(seekBar))
-      }
-      override def onStartTrackingTouch(seekBar: SeekBar): Unit = {
-        runUi(listener.onStartTrackingTouchHandler(seekBar))
-      }
+      override def onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean): Unit =
+        listener.onProgressChangedHandler(seekBar, progress, fromUser).run
+
+      override def onStopTrackingTouch(seekBar: SeekBar): Unit =
+        listener.onStopTrackingTouchHandler(seekBar).run
+
+      override def onStartTrackingTouch(seekBar: SeekBar): Unit =
+        listener.onStartTrackingTouchHandler(seekBar).run
+
     }
   }
 
