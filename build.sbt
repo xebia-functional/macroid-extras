@@ -1,5 +1,7 @@
 import Libraries.android._
 import Libraries.macroid._
+import com.typesafe.sbt.SbtScalariform.ScalariformKeys
+import scalariform.formatter.preferences._
 
 android.Plugin.androidBuildAar
 
@@ -29,6 +31,13 @@ libraryDependencies ++= Seq(
   aar(macroidRoot),
   aar(androidAppCompat),
   aar(androidCardView),
-  aar(androidRecyclerview))
+  aar(androidRecyclerview),
+  aar(androidDesign))
 
 licenses := Seq("Apache License, Version 2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0.txt"))
+
+ScalariformKeys.preferences := ScalariformKeys.preferences.value
+  .setPreference(PlaceScaladocAsterisksBeneathSecondAsterisk, true)
+  .setPreference(DoubleIndentClassDeclaration, false)
+  .setPreference(MultilineScaladocCommentsStartOnFirstLine, true)
+  .setPreference(RewriteArrowSymbols, true)

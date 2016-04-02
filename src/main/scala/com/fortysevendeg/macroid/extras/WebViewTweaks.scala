@@ -16,15 +16,14 @@
 
 package com.fortysevendeg.macroid.extras
 
-import android.view.{ LayoutInflater, ViewGroup }
-import macroid.ContextWrapper
+import android.webkit.{ WebViewClient, WebView }
+import macroid.Tweak
 
-object LayoutBuildingExtra {
+object WebViewTweaks {
+  type W = WebView
 
-  def connect[W](id: Int)(implicit root: RootView): Option[W] = Some(root.view.findViewById(id).asInstanceOf[W])
+  def wvLoadUrl(url: String): Tweak[W] = Tweak[W](_.loadUrl(url))
 
-}
+  def wvClient(webViewClient: WebViewClient): Tweak[W] = Tweak[W](_.setWebViewClient(webViewClient))
 
-class RootView(layout: Int)(implicit context: ContextWrapper) {
-  val view = LayoutInflater.from(context.application).inflate(layout, null).asInstanceOf[ViewGroup]
 }
