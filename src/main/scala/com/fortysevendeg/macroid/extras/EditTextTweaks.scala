@@ -24,7 +24,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import macroid.{ ContextWrapper, Tweak }
 
-class EditTextTweaks {
+object EditTextTweaks {
   type W = EditText
 
   def etAddTextChangedListener(onChanged: (String, Int, Int, Int) ⇒ Unit) = Tweak[W] { view ⇒
