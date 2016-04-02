@@ -111,58 +111,115 @@
     scala.concurrent.forkjoin.LinkedTransferQueue$PaddedAtomicReference tail;
     scala.concurrent.forkjoin.LinkedTransferQueue$PaddedAtomicReference cleanMe;
 }
+# view res/layout/design_navigation_item.xml #generated:17
+-keep class android.support.design.internal.NavigationMenuItemView { <init>(...); }
+
+# view res/layout/design_navigation_menu.xml #generated:17
+-keep class android.support.design.internal.NavigationMenuView { <init>(...); }
+
+# view res/layout/design_bottom_sheet_dialog.xml #generated:17
+-keep class android.support.design.widget.CoordinatorLayout { <init>(...); }
+
+# view res/layout/design_layout_snackbar.xml #generated:18
+# view sw600dp-v13/res/layout-sw600dp-v13/design_layout_snackbar.xml #generated:18
+-keep class android.support.design.widget.Snackbar$SnackbarLayout { <init>(...); }
+
+# view res/layout/abc_alert_dialog_material.xml #generated:75
+-keep class android.support.v4.widget.NestedScrollView { <init>(...); }
+
+# view res/layout/abc_alert_dialog_button_bar_material.xml #generated:40
+-keep class android.support.v4.widget.Space { <init>(...); }
+
 # view res/layout/abc_action_menu_item_layout.xml #generated:17
--keep class android.support.v7.internal.view.menu.ActionMenuItemView { <init>(...); }
+-keep class android.support.v7.view.menu.ActionMenuItemView { <init>(...); }
 
 # view res/layout/abc_expanded_menu_layout.xml #generated:17
--keep class android.support.v7.internal.view.menu.ExpandedMenuView { <init>(...); }
+-keep class android.support.v7.view.menu.ExpandedMenuView { <init>(...); }
 
 # view res/layout/abc_list_menu_item_layout.xml #generated:17
 # view res/layout/abc_popup_menu_item_layout.xml #generated:17
--keep class android.support.v7.internal.view.menu.ListMenuItemView { <init>(...); }
+-keep class android.support.v7.view.menu.ListMenuItemView { <init>(...); }
 
 # view res/layout/abc_screen_toolbar.xml #generated:27
--keep class android.support.v7.internal.widget.ActionBarContainer { <init>(...); }
+-keep class android.support.v7.widget.ActionBarContainer { <init>(...); }
 
 # view res/layout/abc_action_mode_bar.xml #generated:19
 # view res/layout/abc_screen_toolbar.xml #generated:43
--keep class android.support.v7.internal.widget.ActionBarContextView { <init>(...); }
+-keep class android.support.v7.widget.ActionBarContextView { <init>(...); }
 
 # view res/layout/abc_screen_toolbar.xml #generated:17
--keep class android.support.v7.internal.widget.ActionBarOverlayLayout { <init>(...); }
-
-# view res/layout/abc_screen_content_include.xml #generated:19
--keep class android.support.v7.internal.widget.ContentFrameLayout { <init>(...); }
-
-# view res/layout/abc_screen_simple_overlay_action_mode.xml #generated:23
--keep class android.support.v7.internal.widget.FitWindowsFrameLayout { <init>(...); }
-
-# view res/layout/abc_screen_simple.xml #generated:17
--keep class android.support.v7.internal.widget.FitWindowsLinearLayout { <init>(...); }
-
-# view v11/res/layout-v11/abc_screen_content_include.xml #generated:19
--keep class android.support.v7.internal.widget.NativeActionModeAwareLayout { <init>(...); }
-
-# view res/layout/abc_action_mode_close_item_material.xml #generated:17
-# view res/layout/abc_search_view.xml #generated:116
-# view res/layout/abc_search_view.xml #generated:128
-# view res/layout/abc_search_view.xml #generated:38
-# view res/layout/abc_search_view.xml #generated:60
-# view res/layout/abc_search_view.xml #generated:97
--keep class android.support.v7.internal.widget.TintImageView { <init>(...); }
-
-# view res/layout/abc_screen_simple.xml #generated:25
-# view res/layout/abc_screen_simple_overlay_action_mode.xml #generated:32
--keep class android.support.v7.internal.widget.ViewStubCompat { <init>(...); }
+-keep class android.support.v7.widget.ActionBarOverlayLayout { <init>(...); }
 
 # view res/layout/abc_action_menu_layout.xml #generated:17
 -keep class android.support.v7.widget.ActionMenuView { <init>(...); }
 
 # view res/layout/abc_activity_chooser_view.xml #generated:19
--keep class android.support.v7.widget.LinearLayoutCompat { <init>(...); }
+-keep class android.support.v7.widget.ActivityChooserView$InnerLayout { <init>(...); }
+
+# view res/layout/abc_alert_dialog_button_bar_material.xml #generated:18
+-keep class android.support.v7.widget.ButtonBarLayout { <init>(...); }
+
+# view res/layout/abc_screen_content_include.xml #generated:19
+-keep class android.support.v7.widget.ContentFrameLayout { <init>(...); }
+
+# view res/layout/abc_alert_dialog_material.xml #generated:48
+-keep class android.support.v7.widget.DialogTitle { <init>(...); }
+
+# view res/layout/abc_screen_simple_overlay_action_mode.xml #generated:23
+-keep class android.support.v7.widget.FitWindowsFrameLayout { <init>(...); }
+
+# view res/layout/abc_dialog_title_material.xml #generated:22
+# view res/layout/abc_screen_simple.xml #generated:17
+-keep class android.support.v7.widget.FitWindowsLinearLayout { <init>(...); }
 
 # view res/layout/abc_search_view.xml #generated:78
 -keep class android.support.v7.widget.SearchView$SearchAutoComplete { <init>(...); }
 
 # view res/layout/abc_screen_toolbar.xml #generated:36
 -keep class android.support.v7.widget.Toolbar { <init>(...); }
+
+# view res/layout/abc_screen_simple.xml #generated:25
+# view res/layout/abc_screen_simple_overlay_action_mode.xml #generated:32
+-keep class android.support.v7.widget.ViewStubCompat { <init>(...); }
+
+# Copyright (C) 2015 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# When layoutManager xml attribute is used, RecyclerView inflates
+#LayoutManagers' constructors using reflection.
+-keep public class * extends android.support.v7.widget.RecyclerView$LayoutManager {
+    public <init>(...);
+}
+# Copyright (C) 2015 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# CoordinatorLayout resolves the behaviors of its child components with reflection.
+-keep public class * extends android.support.design.widget.CoordinatorLayout$Behavior {
+    public <init>(android.content.Context, android.util.AttributeSet);
+    public <init>();
+}
+
+# Make sure we keep annotations for CoordinatorLayout's DefaultBehavior
+-keepattributes *Annotation*

@@ -16,26 +16,14 @@
 
 package com.fortysevendeg.macroid.extras
 
-import android.app.Activity
-import android.content.{ComponentName, Intent}
 import android.graphics.drawable.Drawable
 import android.os.Handler
 import android.view.ContextThemeWrapper
 import android.widget.Toast
 import com.fortysevendeg.macroid.extras.DeviceVersion.Lollipop
-import macroid.{ContextWrapper, ActivityContextWrapper, Ui}
+import macroid.{ActivityContextWrapper, ContextWrapper, Ui}
 
 object UIActionsExtras {
-
-  def uiStartActivity[T <: Activity]()(implicit c: ActivityContextWrapper, m: Manifest[T]): Ui[Unit] =
-    Ui(c.bestAvailable.startActivity(new Intent(c.bestAvailable, m.runtimeClass)))
-
-  def uiStartActivityForResult[T <: Activity](result: Int)(implicit c: ActivityContextWrapper, m: Manifest[T]): Ui[Unit] =
-    Ui {
-      c.original.get foreach { activity =>
-        activity.startActivityForResult(new Intent(activity, m.runtimeClass), result)
-      }
-    }
 
   def uiShortToast(msg: Int)(implicit c: ContextWrapper): Ui[Unit] =
     Ui(Toast.makeText(c.bestAvailable, msg, Toast.LENGTH_SHORT).show())
@@ -66,28 +54,6 @@ object UIActionsExtras {
 }
 
 object ActionsExtras {
-
-  def aStartActivity[T <: Activity]()(implicit c: ActivityContextWrapper, m: Manifest[T]): Unit =
-    c.original.get foreach (_.startActivity(new Intent(c.bestAvailable, m.runtimeClass)))
-
-  def aStartActivityForResult[T <: Activity](result: Int)(implicit c: ActivityContextWrapper, m: Manifest[T]): Unit =
-    c.original.get foreach { activity =>
-      activity.startActivityForResult(new Intent(activity, m.runtimeClass), result)
-    }
-
-  def aStartActivityFromComponentName[T <: Activity](componentName: ComponentName)
-      (implicit c: ActivityContextWrapper): Unit = {
-    val intent = new Intent()
-    intent.setComponent(componentName)
-    c.original.get foreach(_.startActivity(intent))
-  }
-
-  def aStartActivityFromComponentNameForResult[T <: Activity](componentName: ComponentName, result: Int)
-      (implicit c: ActivityContextWrapper): Unit = {
-    val intent = new Intent()
-    intent.setComponent(componentName)
-    c.original.get foreach (_.startActivityForResult(intent, result))
-  }
 
   def aShortToast(msg: Int)(implicit c: ContextWrapper): Unit =
     Toast.makeText(c.bestAvailable, msg, Toast.LENGTH_SHORT).show()
