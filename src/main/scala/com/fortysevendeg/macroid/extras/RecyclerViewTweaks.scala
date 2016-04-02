@@ -21,7 +21,7 @@ package com.fortysevendeg.macroid.extras
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.animation.AnimationUtils
-import macroid.{ContextWrapper, Tweak}
+import macroid.{ ContextWrapper, Tweak }
 
 object RecyclerViewTweaks {
   type W = RecyclerView
@@ -38,7 +38,7 @@ object RecyclerViewTweaks {
 
   def rvItemAnimator(animator: RecyclerView.ItemAnimator): Tweak[W] = Tweak[W](_.setItemAnimator(animator))
 
-  def rvLayoutAnimation(res: Int)(implicit contextWrapper: ContextWrapper) = Tweak[W]{ view =>
+  def rvLayoutAnimation(res: Int)(implicit contextWrapper: ContextWrapper) = Tweak[W] { view ⇒
     view.setLayoutAnimation(AnimationUtils.loadLayoutAnimation(contextWrapper.application, res))
   }
 
@@ -49,7 +49,7 @@ object RecyclerViewTweaks {
 
   def rvInvalidateItemDecorations: Tweak[W] = Tweak[W](_.invalidateItemDecorations())
 
-  def rvItemTouchHelperCallback(callback: ItemTouchHelper.Callback): Tweak[W] = Tweak[W] { rv =>
+  def rvItemTouchHelperCallback(callback: ItemTouchHelper.Callback): Tweak[W] = Tweak[W] { rv ⇒
     val touchHelper = new ItemTouchHelper(callback)
     touchHelper.attachToRecyclerView(rv)
   }

@@ -48,15 +48,15 @@ object DeviceVersion {
 
     def !=(a: SDKVersion) = this.version != a.version
 
-    def withOpThan[A](op: => Boolean)(f : => A) : Option[A] = if (op) Some(f) else None
+    def withOpThan[A](op: ⇒ Boolean)(f: ⇒ A): Option[A] = if (op) Some(f) else None
 
-    def ifEqualThen[A](f : => A) : Option[A] = withOpThan(this == CurrentVersion)(f)
+    def ifEqualThen[A](f: ⇒ A): Option[A] = withOpThan(this == CurrentVersion)(f)
 
-    def ifNotEqualThen[A](f : => A) : Option[A] = withOpThan(this != CurrentVersion)(f)
+    def ifNotEqualThen[A](f: ⇒ A): Option[A] = withOpThan(this != CurrentVersion)(f)
 
-    def ifSupportedThen[A](f : => A) : Option[A] = withOpThan(this <= CurrentVersion)(f)
+    def ifSupportedThen[A](f: ⇒ A): Option[A] = withOpThan(this <= CurrentVersion)(f)
 
-    def ifNotSupportedThen[A](f : => A) : Option[A] = withOpThan(this > CurrentVersion)(f)
+    def ifNotSupportedThen[A](f: ⇒ A): Option[A] = withOpThan(this > CurrentVersion)(f)
 
   }
 

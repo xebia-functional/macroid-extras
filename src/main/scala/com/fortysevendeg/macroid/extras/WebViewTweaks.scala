@@ -16,7 +16,7 @@
 
 package com.fortysevendeg.macroid.extras
 
-import android.webkit.{WebViewClient, WebView}
+import android.webkit.{ WebViewClient, WebView }
 import macroid.Tweak
 
 object WebViewTweaks {

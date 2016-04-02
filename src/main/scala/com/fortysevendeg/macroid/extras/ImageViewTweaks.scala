@@ -18,14 +18,14 @@
 
 package com.fortysevendeg.macroid.extras
 
-import android.graphics.{PorterDuffColorFilter, Bitmap}
+import android.graphics.{ PorterDuffColorFilter, Bitmap }
 import android.graphics.PorterDuff.Mode
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.widget.ImageView
 import android.widget.ImageView.ScaleType
 import com.fortysevendeg.macroid.extras.ResourcesExtras._
-import macroid.{ContextWrapper, Tweak}
+import macroid.{ ContextWrapper, Tweak }
 
 object ImageViewTweaks {
   type W = ImageView

@@ -21,18 +21,17 @@ package com.fortysevendeg.macroid.extras
 import android.content.res.ColorStateList
 import android.support.design.widget.FloatingActionButton
 import com.fortysevendeg.macroid.extras.ResourcesExtras._
-import macroid.{Tweak, ContextWrapper}
-
+import macroid.{ Tweak, ContextWrapper }
 
 object FloatingActionButtonTweaks {
   type W = FloatingActionButton
 
-  def fbaColorResource(id: Int, rippleId: Int)(implicit contextWrapper: ContextWrapper) = Tweak[W] { view =>
+  def fbaColorResource(id: Int, rippleId: Int)(implicit contextWrapper: ContextWrapper) = Tweak[W] { view ⇒
     view.setBackgroundTintList(contextWrapper.application.getResources.getColorStateList(id))
     view.setRippleColor(resGetColor(rippleId))
   }
 
-  def fbaColor(color: Int, rippleColor: Int)(implicit contextWrapper: ContextWrapper) = Tweak[W] { view =>
+  def fbaColor(color: Int, rippleColor: Int)(implicit contextWrapper: ContextWrapper) = Tweak[W] { view ⇒
     view.setBackgroundTintList(ColorStateList.valueOf(color))
     view.setRippleColor(rippleColor)
   }

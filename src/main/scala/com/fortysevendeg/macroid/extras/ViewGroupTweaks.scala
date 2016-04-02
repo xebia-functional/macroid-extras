@@ -18,7 +18,7 @@
 
 package com.fortysevendeg.macroid.extras
 
-import android.view.{View, ViewGroup}
+import android.view.{ View, ViewGroup }
 import macroid.Tweak
 
 object ViewGroupTweaks {
@@ -30,14 +30,12 @@ object ViewGroupTweaks {
 
   def vgAddView[V <: View](view: V, params: ViewGroup.LayoutParams): Tweak[W] = Tweak[W](_.addView(view, params))
 
-  def vgAddViews[V <: View](views: Seq[V]): Tweak[W] = Tweak[W] {
-    rootView ⇒
-      views foreach rootView.addView
+  def vgAddViews[V <: View](views: Seq[V]): Tweak[W] = Tweak[W] { rootView ⇒
+    views foreach rootView.addView
   }
 
-  def vgAddViews[V <: View](views: Seq[V], params: ViewGroup.LayoutParams): Tweak[W] = Tweak[W] {
-    rootView ⇒
-      views foreach (rootView.addView(_, params))
+  def vgAddViews[V <: View](views: Seq[V], params: ViewGroup.LayoutParams): Tweak[W] = Tweak[W] { rootView ⇒
+    views foreach (rootView.addView(_, params))
   }
 
   val vgRemoveAllViews: Tweak[W] = Tweak[W](_.removeAllViews())

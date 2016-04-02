@@ -16,7 +16,7 @@
 
 package com.fortysevendeg.macroid.extras
 
-import android.view.{LayoutInflater, ViewGroup}
+import android.view.{ LayoutInflater, ViewGroup }
 import macroid.ContextWrapper
 
 object LayoutBuildingExtra {

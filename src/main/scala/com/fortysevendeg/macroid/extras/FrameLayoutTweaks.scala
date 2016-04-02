@@ -48,10 +48,10 @@ object FrameLayoutTweaks {
     marginLeft: Int = 0,
     marginTop: Int = 0,
     marginRight: Int = 0,
-    marginBottom: Int = 0): Tweak[View] = Tweak[View] {
-    view ⇒
-      val params = new FrameLayout.LayoutParams(view.getLayoutParams)
-      params.setMargins(marginLeft, marginTop, marginRight, marginBottom)
-      view.setLayoutParams(params)
+    marginBottom: Int = 0
+  ): Tweak[View] = Tweak[View] { view ⇒
+    val params = new FrameLayout.LayoutParams(view.getLayoutParams)
+    params.setMargins(marginLeft, marginTop, marginRight, marginBottom)
+    view.setLayoutParams(params)
   }
 }

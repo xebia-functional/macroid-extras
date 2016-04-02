@@ -19,7 +19,7 @@
 package com.fortysevendeg.macroid.extras
 
 import android.support.v4.view.ViewPager.OnPageChangeListener
-import android.support.v4.view.{PagerAdapter, ViewPager}
+import android.support.v4.view.{ PagerAdapter, ViewPager }
 import macroid.Tweak
 
 object ViewPagerTweaks {
@@ -34,7 +34,7 @@ object ViewPagerTweaks {
   def vpCurrentItem(currentItem: Int, smoothScroll: Boolean): Tweak[W] =
     Tweak[W](_.setCurrentItem(currentItem, smoothScroll))
 
-  def vpPageTransformer(reverseDrawingOrder: Boolean, transformer: ViewPager.PageTransformer ): Tweak[W] =
+  def vpPageTransformer(reverseDrawingOrder: Boolean, transformer: ViewPager.PageTransformer): Tweak[W] =
     Tweak[W](_.setPageTransformer(reverseDrawingOrder, transformer))
 
   def vpOffscreenPageLimit(limit: Int): Tweak[W] = Tweak[W](_.setOffscreenPageLimit(limit))

@@ -18,12 +18,11 @@
 
 package com.fortysevendeg.macroid.extras
 
-import android.widget.{Spinner, SpinnerAdapter}
+import android.widget.{ Spinner, SpinnerAdapter }
 import macroid.Tweak
 
 object SpinnerTweaks {
   type W = Spinner
-
 
   def sAdapter(adapter: SpinnerAdapter) = Tweak[W](_.setAdapter(adapter))
 

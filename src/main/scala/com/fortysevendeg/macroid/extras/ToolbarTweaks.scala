@@ -22,7 +22,7 @@ import android.graphics.drawable.Drawable
 import android.support.v7.widget.Toolbar
 import android.view.View
 import android.view.View.OnClickListener
-import macroid.{Ui, Tweak}
+import macroid.{ Ui, Tweak }
 
 object ToolbarTweaks {
   type W = Toolbar
@@ -43,11 +43,11 @@ object ToolbarTweaks {
 
   def tbNavigationIcon(drawable: Drawable): Tweak[W] = Tweak[W](_.setNavigationIcon(drawable))
 
-  def tbNavigationOnClickListener(click: (View) => Ui[_]): Tweak[W] = Tweak[W](_.setNavigationOnClickListener(new OnClickListener {
+  def tbNavigationOnClickListener(click: (View) ⇒ Ui[_]): Tweak[W] = Tweak[W](_.setNavigationOnClickListener(new OnClickListener {
     override def onClick(v: View): Unit = click(v).run
   }))
 
-  def tbChangeHeightLayout(height: Int): Tweak[W] = Tweak[W] { view =>
+  def tbChangeHeightLayout(height: Int): Tweak[W] = Tweak[W] { view ⇒
     view.getLayoutParams.height = height
     view.requestLayout()
   }

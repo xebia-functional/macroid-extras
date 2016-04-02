@@ -21,7 +21,7 @@ import android.os.Handler
 import android.view.ContextThemeWrapper
 import android.widget.Toast
 import com.fortysevendeg.macroid.extras.DeviceVersion.Lollipop
-import macroid.{ActivityContextWrapper, ContextWrapper, Ui}
+import macroid.{ ActivityContextWrapper, ContextWrapper, Ui }
 
 object UIActionsExtras {
 
@@ -37,14 +37,14 @@ object UIActionsExtras {
   def uiLongToast(msg: String)(implicit c: ContextWrapper): Ui[Unit] =
     Ui(Toast.makeText(c.bestAvailable, msg, Toast.LENGTH_LONG).show())
 
-  def uiHandler(f: => Ui[_]): Ui[Unit] =
+  def uiHandler(f: ⇒ Ui[_]): Ui[Unit] =
     Ui {
       new Handler().post(new Runnable {
         override def run(): Unit = f.run
       })
     }
 
-  def uiHandlerDelayed(f: => Ui[_], delayMilis: Int): Ui[Unit] =
+  def uiHandlerDelayed(f: ⇒ Ui[_], delayMilis: Int): Ui[Unit] =
     Ui {
       new Handler().postDelayed(new Runnable {
         override def run(): Unit = f.run
@@ -73,7 +73,7 @@ object ThemeExtras {
 
   def themeGetDrawable(themeId: Int, attr: Int)(implicit activityContext: ActivityContextWrapper): Option[Drawable] =
     activityContext.original.get map {
-      activity =>
+      activity ⇒
         val contextTheme = new ContextThemeWrapper(activity, themeId)
         val a = contextTheme.getTheme.obtainStyledAttributes(Array(attr))
         val attributeResourceId = a.getResourceId(0, 0)
@@ -84,7 +84,7 @@ object ThemeExtras {
 
   def themeGetDrawable(attr: Int)(implicit activityContext: ActivityContextWrapper): Option[Drawable] =
     activityContext.original.get map {
-      activity =>
+      activity ⇒
         val a = activity.getTheme.obtainStyledAttributes(Array(attr))
         val attributeResourceId = a.getResourceId(0, 0)
         val drawable = activity.getResources.getDrawable(attributeResourceId)
@@ -96,8 +96,7 @@ object ThemeExtras {
 
 object ResourcesExtras {
 
-  private def resGetResource[A](resource: String, resourceType: String)(f: (ContextWrapper, Int) ⇒ A)
-      (implicit c: ContextWrapper): Option[A] = {
+  private def resGetResource[A](resource: String, resourceType: String)(f: (ContextWrapper, Int) ⇒ A)(implicit c: ContextWrapper): Option[A] = {
     val resourceId = c.bestAvailable.getResources.getIdentifier(resource, resourceType, c.bestAvailable.getPackageName)
     resourceId match {
       case 0 ⇒ None
@@ -150,13 +149,13 @@ object ResourcesExtras {
     resGetResource(resource, "string")((c, resourceId) ⇒ c.bestAvailable.getResources.getString(resourceId))
 
   def resGetString(resourceId: Int, formatArgs: AnyRef*)(implicit c: ContextWrapper): String =
-    c.bestAvailable.getResources.getString(resourceId, formatArgs:_*)
+    c.bestAvailable.getResources.getString(resourceId, formatArgs: _*)
 
   def resGetString(resource: String, formatArgs: AnyRef*)(implicit c: ContextWrapper): Option[String] =
-    resGetResource(resource, "string")((c, resourceId) ⇒ c.bestAvailable.getResources.getString(resourceId, formatArgs:_*))
+    resGetResource(resource, "string")((c, resourceId) ⇒ c.bestAvailable.getResources.getString(resourceId, formatArgs: _*))
 
   private[this] def getDrawable(resourceId: Int)(implicit c: ContextWrapper) =
-    Lollipop.ifSupportedThen{
+    Lollipop.ifSupportedThen {
       c.bestAvailable.getResources.getDrawable(resourceId, c.bestAvailable.getTheme)
     } getOrElse {
       c.bestAvailable.getResources.getDrawable(resourceId)

@@ -16,9 +16,9 @@
 
 package com.fortysevendeg.macroid.extras
 
-import android.animation.{Animator, AnimatorListenerAdapter}
+import android.animation.{ Animator, AnimatorListenerAdapter }
 import android.view.View._
-import android.view.{View, ViewAnimationUtils}
+import android.view.{ View, ViewAnimationUtils }
 import macroid.Snail
 
 import scala.concurrent.Promise
@@ -70,7 +70,7 @@ object MoveSnails {
     view ⇒
       val animPromise = Promise[Unit]()
 
-      maybeToView foreach  {
+      maybeToView foreach {
         toView ⇒
           val finalX: Int = (toView.getX + (toView.getWidth / 2) - ((view.getWidth / 2) + view.getX)).toInt
           val finalY: Int = (toView.getY + (toView.getHeight / 2) - ((view.getHeight / 2) + view.getY)).toInt
@@ -110,12 +110,11 @@ object MoveSnails {
 
 object SnailsUtils {
 
-  def calculateRadius(x : Int = 0, y : Int = 0, width : Int = 0, height : Int = 0): Int = {
+  def calculateRadius(x: Int = 0, y: Int = 0, width: Int = 0, height: Int = 0): Int = {
     val catheti1: Int = if (x < width / 2) width - x else x
     val catheti2: Int = if (y < height / 2) height - y else y
     Math.sqrt((catheti1 * catheti1) + (catheti2 * catheti2)).asInstanceOf[Int]
   }
 
 }
-
 

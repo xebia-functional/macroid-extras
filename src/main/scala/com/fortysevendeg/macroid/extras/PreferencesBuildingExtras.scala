@@ -16,7 +16,7 @@
 
 package com.fortysevendeg.macroid.extras
 
-import android.preference.{Preference, PreferenceFragment}
+import android.preference.{ Preference, PreferenceFragment }
 
 object PreferencesBuildingExtra {
 

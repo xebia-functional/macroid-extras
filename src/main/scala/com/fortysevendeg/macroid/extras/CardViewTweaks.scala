@@ -20,7 +20,7 @@ package com.fortysevendeg.macroid.extras
 
 import android.support.v7.widget.CardView
 import com.fortysevendeg.macroid.extras.ResourcesExtras._
-import macroid.{ContextWrapper, Tweak}
+import macroid.{ ContextWrapper, Tweak }
 
 object CardViewTweaks {
   type W = CardView

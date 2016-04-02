@@ -20,11 +20,11 @@ package com.fortysevendeg.macroid.extras
 
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
-import android.text.{Spanned, Spannable}
+import android.text.{ Spanned, Spannable }
 import android.text.TextUtils.TruncateAt
 import android.util.TypedValue
 import android.widget.TextView
-import macroid.{ContextWrapper, Tweak}
+import macroid.{ ContextWrapper, Tweak }
 
 object TextTweaks {
   type W = TextView
@@ -56,13 +56,13 @@ object TextTweaks {
 
   val tvBoldItalicCondensed: Tweak[W] = Tweak[W](x ⇒ x.setTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD_ITALIC)))
 
-  val tvNormalMedium: Tweak[W] = Tweak[W](x => x.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL)))
+  val tvNormalMedium: Tweak[W] = Tweak[W](x ⇒ x.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL)))
 
-  val tvBoldMedium: Tweak[W] = Tweak[W](x => x.setTypeface(Typeface.create("sans-serif-medium", Typeface.BOLD)))
+  val tvBoldMedium: Tweak[W] = Tweak[W](x ⇒ x.setTypeface(Typeface.create("sans-serif-medium", Typeface.BOLD)))
 
-  val tvItalicMedium: Tweak[W] = Tweak[W](x => x.setTypeface(Typeface.create("sans-serif-medium", Typeface.ITALIC)))
+  val tvItalicMedium: Tweak[W] = Tweak[W](x ⇒ x.setTypeface(Typeface.create("sans-serif-medium", Typeface.ITALIC)))
 
-  val tvBoldItalicMedium: Tweak[W] = Tweak[W](x => x.setTypeface(Typeface.create("sans-serif-medium", Typeface.BOLD_ITALIC)))
+  val tvBoldItalicMedium: Tweak[W] = Tweak[W](x ⇒ x.setTypeface(Typeface.create("sans-serif-medium", Typeface.BOLD_ITALIC)))
 
   def tvSize(points: Int): Tweak[W] = Tweak[W](_.setTextSize(TypedValue.COMPLEX_UNIT_SP, points))
 
@@ -99,7 +99,8 @@ object TextTweaks {
     left: Option[Drawable] = None,
     top: Option[Drawable] = None,
     right: Option[Drawable] = None,
-    bottom: Option[Drawable] = None) =
+    bottom: Option[Drawable] = None
+  ) =
     Tweak[TextView](_.setCompoundDrawablesWithIntrinsicBounds(left.orNull, top.orNull, right.orNull, bottom.orNull))
 
   def tvCompoundDrawablesWithIntrinsicBoundsResources(left: Int = 0, top: Int = 0, right: Int = 0, bottom: Int = 0) =

@@ -24,9 +24,9 @@ import macroid.Tweak
 object TabLayoutTweaks {
   type W = TabLayout
 
-  def tlAddTabs(titles: (String, AnyRef)*): Tweak[W] = Tweak[W] { view =>
-    titles foreach { case (title, tag) =>
-      view.addTab(view.newTab().setText(title).setTag(tag))
+  def tlAddTabs(titles: (String, AnyRef)*): Tweak[W] = Tweak[W] { view ⇒
+    titles foreach {
+      case (title, tag) ⇒ view.addTab(view.newTab().setText(title).setTag(tag))
     }
   }
 
