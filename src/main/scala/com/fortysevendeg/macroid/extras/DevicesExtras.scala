@@ -75,6 +75,8 @@ object DeviceVersion {
 
   case object CurrentVersion extends Version(SDK_INT)
 
+  case object Marshmallow extends Version(M)
+
   case object Lollipop extends Version(LOLLIPOP)
 
   case object KitKatWatch extends Version(KITKAT_WATCH)
