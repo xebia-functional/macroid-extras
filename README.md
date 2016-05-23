@@ -13,22 +13,12 @@ Used in:
 Usage
 ======
 
+Version 0.3 is using Macroid version `2.0.0-M5`
+
 ```scala
 
 libraryDependencies ++= Seq(
-  aar("com.fortysevendeg" %% "macroid-extras" % "0.2")
-
-```
-
-If you want to use the SNAPSHOT version you need to add the Sonatype SNAPSHOT repo
- 
-```scala
-
-resolvers += 
-  "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
-
-libraryDependencies ++= Seq(
-  aar("com.fortysevendeg" %% "macroid-extras" % "0.3-SNAPSHOT")
+  aar("com.fortysevendeg" %% "macroid-extras" % "0.3")
 
 ```
 
