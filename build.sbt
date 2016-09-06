@@ -15,6 +15,8 @@ scalaVersion := Versions.scalaV
 
 scalacOptions ++= Seq("-feature", "-deprecation")
 
+javacOptions ++= Seq("-source", "1.7", "-target", "1.7")
+
 resolvers ++= Seq(
   Resolver.mavenLocal,
   DefaultMavenRepository,
