@@ -1,3 +1,5 @@
+**PROJECT DISCONTINUED** : Now, this module is included in Macroid[https://github.com/47deg/macroid], you can use it  including it in your project 
+
 [![Macroid-Extras Status](https://circleci.com/gh/47deg/macroid-extras.svg?&style=shield&circle-token=64357a7024f51a97548b75794ef323b52295a23b "Macroid Extras Status")](https://circleci.com/gh/47deg/macroid-extras)
 
 Macroid Extras Lib
